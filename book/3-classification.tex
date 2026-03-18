@@ -3,6 +3,7 @@
 % ---------- Confusion Matrix ----------
 \thispagestyle{classificationstyle}
 \section{Confusion Matrix}
+\subsection{Confusion Matrix}
 A confusion matrix is a table that shows how well a classification model makes predictions.
 It compares the model's predicted labels with the true labels.
 
@@ -73,6 +74,7 @@ making it unavoidable if you need to calculate precision, recall, F1-score, or o
 \item Sensitive to class imbalance; raw counts may be misleading without normalization.
 }
 \clearpage
+\thispagestyle{customstyle}
 In some interesting real-world industries, it is difficult to construct a standard confusion matrix. 
 
 For instance, in predictive maintenance, machine learning models predict when a machine might fail so maintenance can be scheduled in advance.
@@ -83,7 +85,6 @@ This raises the question: How can we be sure the model was correct? Is there a w
 This lack of failure is our original goal, and it is beneficial. However, it also results in no immediate failure or target data to validate the model’s prediction. 
 The critical feedback is delayed, and the resultant confusion matrix is “censored”.
 
-\newcolumntype{C}[1]{>{\centering\arraybackslash}m{#1}}
 \begin{table}[h]
 \centering
 \renewcommand{\arraystretch}{2.5}
@@ -560,6 +561,9 @@ and in recommendation systems, irrelevant suggestions (false positives) can frus
 \item It can be misleading when used in isolation, as a model that predicts only one sample as positive and correctly gets it would have perfect precision.
 }
 
+\clearpage
+\thispagestyle{customstyle}
+
 \orangebox{%
 Did you know that...}
 {
@@ -735,6 +739,7 @@ ROC AUC is ideal when you need a threshold-independent measure to evaluate and c
 false positives and false negatives are unknown or equally important.
 
 \clearpage
+\thispagestyle{customstyle}
 \coloredboxes{
 \item ROC AUC is threshold-independent. It summarizes classifier performance across all possible thresholds.
 \item It allows for a probabilistic interpretation, providing a clear comparison between different models.
@@ -964,7 +969,7 @@ particularly in segmentation tasks. It measures the overlap between the predicte
 The Jaccard Index ranges from 0 to 1, where 1 indicates perfect overlap between the predicted and true sets (i.e., all predictions are correct),
 and 0 means no overlap at all. In binary classification, the formula can be rewritten in terms of true positives $TP$, false positives $FP$, and false negatives
 $FN$ as: $J = \frac{TP}{TP + FP + FN}$. Additionally, the Jaccard Index is a popular metric for evaluating computer vision
-models for image segmentation tasks, in those cases it is communly known as Intersection over Union (IoU).
+models for image segmentation tasks, in those cases it is commonly known as Intersection over Union (IoU).
 
 \textbf{When to use the Jaccard Index}
 
@@ -1248,14 +1253,14 @@ EC allows assigning specific costs to each combination of true class and predict
 %\item Does not limit the possible decisions to only the class labels.
 }
 {
-\item It's effectiveness depends on well-calibrated model probabilities 
+\item Its effectiveness depends on well-calibrated model probabilities 
 \item Defining an appropriate cost matrix can be challenging and requires knowledge of the application 
 %\item EC is less widely adopted, making it harder to compare results with existing benchmarks.
 }
 
 
 \clearpage
-\thispagestyle{classificationstyle}
+\thispagestyle{customstyle}
 
 Consider a loan approval scenario with two true classes: $H_1$ (Creditworthy) and $H_2$ (Not Creditworthy), and two decisions: $D_1$ (Approve Loan) and $D_2$ (Reject Loan).
 
