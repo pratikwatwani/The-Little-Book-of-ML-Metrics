@@ -1,0 +1,13 @@
+[project]
+name = "the-little-book-of-ml-metrics"
+version = "0.1.0"
+description = "Plotting and notebook tooling for The Little Book of ML Metrics"
+requires-python = ">=3.10"
+dependencies = [
+    "numpy",
+    "matplotlib",
+    "scikit-learn",
+    "opencv-python",
+    "yfinance",
+    "jupyter",
+]
