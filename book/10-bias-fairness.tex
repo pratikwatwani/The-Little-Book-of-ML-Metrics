@@ -18,8 +18,17 @@ the probability of receiving a positive prediction should be the same across gro
 
 % Formula
 \begin{center}
-    % P(Y^=1∣A=a)=P(Y^=1∣A=b)∀a,b
-    FORMULA GOES HERE
+    \tikz{
+        \node[inner sep=2pt, font=\Large] (a) {
+            {
+                $\displaystyle
+                P({\color{nmlpurple}\hat{Y}} = 1 \mid {\color{nmlcyan}A} = a) = P({\color{nmlpurple}\hat{Y}} = 1 \mid {\color{nmlcyan}A} = b) \quad \forall\, a, b
+                $
+            }
+        };
+        \draw[-latex,nmlpurple, semithick] ($(a.north)+(-1.5,-0.1)$) to[bend right=15] node[pos=1, left] {predicted outcome} +(-1,.5);
+        \draw[-latex,nmlcyan, semithick] ($(a.south)+(-0.3,0.3)$) to[bend left=15] node[pos=1, left] {protected attribute} +(-1,-.5);
+    }
 \end{center}
 
 A model satisfies demographic parity if members of different demographic groups are selected at equal rates. For example, in a loan approval
@@ -48,6 +57,10 @@ primary concern.
 {Demographic parity goes by several other names in the literature, often referred to as statistical parity, group fairness, or even
 independence criterion. Different research communities picked different terms, but they all describe the same idea.}
 
+\textbf{Other related metrics}
+
+For a stricter fairness notion that accounts for prediction correctness, consider Equality of Opportunity or Equality of Odds.
+If score calibration matters more than outcome rates, see Calibration within Groups.
 
 % ---------- Equality of Opportunity ----------
 \clearpage
@@ -61,8 +74,18 @@ Formally, the metric requires that the True Positive Rate (TPR) be equal across 
 
 % Formula
 \begin{center}
-    % P(Y^=1∣Y=1,A=a)=P(Y^=1∣Y=1,A=b)
-    FORMULA GOES HERE
+    \tikz{
+        \node[inner sep=2pt, font=\Large] (a) {
+            {
+                $\displaystyle
+                P({\color{nmlpurple}\hat{Y}} = 1 \mid {\color{nmlred}Y} = 1,\, {\color{nmlcyan}A} = a) = P({\color{nmlpurple}\hat{Y}} = 1 \mid {\color{nmlred}Y} = 1,\, {\color{nmlcyan}A} = b)
+                $
+            }
+        };
+        \draw[-latex,nmlpurple, semithick] ($(a.north)+(-2.0,-0.1)$) to[bend right=15] node[pos=1, left] {predicted outcome} +(-1,.5);
+        \draw[-latex,nmlred, semithick] ($(a.north)+(0.0,-0.1)$) to[bend left=15] node[pos=1, right] {actual outcome} +(1,.5);
+        \draw[-latex,nmlcyan, semithick] ($(a.south)+(0.0,0.3)$) to[bend left=15] node[pos=1, left] {protected attribute} +(-1,-.5);
+    }
 \end{center}
 
 In other words, if two people are equally qualified, their chance of being recognized as such by the model should not depend on their
@@ -94,6 +117,11 @@ is more meaningful than enforcing equal acceptance rates.
 In that paper, they introduced both Equality of Opportunity and its stricter sibling, Equalized Odds. The terms have since become standard
 in the fairness in ML literature.}
 
+\textbf{Other related metrics}
+
+Equality of Opportunity only constrains the true positive rate. For a stricter version that also constrains the false positive rate,
+see Equality of Odds. For outcome-independent fairness, see Demographic Parity.
+
 % ---------- Equality of Odds ----------
 \clearpage
 \thispagestyle{biasfairnesstyle}
@@ -110,8 +138,19 @@ no matter which group an individual belongs to.
 
 % Formula
 \begin{center}
-    % P(Y^=1∣Y=y,A=a)=P(Y^=1∣Y=y,A=b)∀y∈{0,1},a,b∈A
-    FORMULA GOES HERE
+    \tikz{
+        \node[inner sep=2pt, font=\Large] (a) {
+            {
+                $\displaystyle
+                P({\color{nmlpurple}\hat{Y}} = 1 \mid {\color{nmlred}Y} = y,\, {\color{nmlcyan}A} = a) = P({\color{nmlpurple}\hat{Y}} = 1 \mid {\color{nmlred}Y} = y,\, {\color{nmlcyan}A} = b)
+                $
+            }
+        };
+        \node[below=0.1cm of a, font=\normalsize] {$\forall\, y \in \{0, 1\},\; \forall\, a, b$};
+        \draw[-latex,nmlpurple, semithick] ($(a.north)+(-2.0,-0.1)$) to[bend right=15] node[pos=1, left] {predicted outcome} +(-1,.5);
+        \draw[-latex,nmlred, semithick] ($(a.north)+(0.0,-0.1)$) to[bend left=15] node[pos=1, right] {actual outcome} +(1,.5);
+        \draw[-latex,nmlcyan, semithick] ($(a.south)+(0.0,0.6)$) to[bend left=15] node[pos=1, left] {protected attribute} +(-1,-1);
+    }
 \end{center}
 
 Equalized Odds is stricter than Equality of Opportunity, which only enforces equality on the true positive rate. If we relax the Equalized Odds
@@ -138,8 +177,13 @@ truly creditworthy, but also equally likely to be mistakenly given a loan when t
 
 \orangebox{Did you know that...}
 {Equality of Odds was popularized in the 2016 paper “Equality of Opportunity in Supervised Learning” by Hardt, Price, and Srebro. 
-In that paper, they introduced both Equality of Odds and its less stricter sibling, Equality Opportunity. The terms have since become standard
+In that paper, they introduced both Equality of Odds and its less strict sibling, Equality of Opportunity. The terms have since become standard
 in the fairness in ML literature.}
+
+\textbf{Other related metrics}
+
+Equality of Odds is stricter than Equality of Opportunity (which only constrains TPR). For an even simpler criterion that ignores
+prediction correctness, see Demographic Parity. For score-level fairness, see Calibration within Groups.
 
 % For second page we can follow The ROC Curves example of this resource: https://mlu-explain.github.io/equality-of-odds/
 
@@ -149,7 +193,7 @@ in the fairness in ML literature.}
 \section{Predictive Parity}
 \subsection{Predictive Parity}
 
-references:
+% references:
 % https://fairware.cs.umass.edu/papers/Verma.pdf
 % https://njoselson.github.io/pdfs/ProPublica_Commentary_Final_070616.pdf
 % https://afraenkel.github.io/fairness-book/content/05-parity-measures.html#predictive-value-parity-ppv-parity-and-npv-parity
@@ -161,8 +205,18 @@ all groups.
 
 % Formula
 \begin{center}
-    % P(Y=1∣Y^=1,A=a)=P(Y=1∣Y^=1,A=b)
-    FORMULA GOES HERE
+    \tikz{
+        \node[inner sep=2pt, font=\Large] (a) {
+            {
+                $\displaystyle
+                P({\color{nmlred}Y} = 1 \mid {\color{nmlpurple}\hat{Y}} = 1,\, {\color{nmlcyan}A} = a) = P({\color{nmlred}Y} = 1 \mid {\color{nmlpurple}\hat{Y}} = 1,\, {\color{nmlcyan}A} = b)
+                $
+            }
+        };
+        \draw[-latex,nmlred, semithick] ($(a.north)+(-2.0,-0.1)$) to[bend right=15] node[pos=1, left] {actual outcome} +(-1,.5);
+        \draw[-latex,nmlpurple, semithick] ($(a.north)+(0.0,-0.1)$) to[bend left=15] node[pos=1, right] {predicted outcome} +(1,.5);
+        \draw[-latex,nmlcyan, semithick] ($(a.south)+(0.0,0.3)$) to[bend left=15] node[pos=1, left] {protected attribute} +(-1,-.5);
+    }
 \end{center}
 
 If predictive parity holds, then the false discovery rate (FDR) will also be equal across groups, since $FDR = 1 − PPV$.
@@ -192,6 +246,11 @@ impossible to satisfy both simultaneously.
 unfair because it did not satisfy equalized odds, while its developers countered that the tool did satisfy predictive parity, illustrating how
 different fairness definitions can conflict and fuel controversy.}
 
+\textbf{Other related metrics}
+
+Predictive Parity focuses on precision (PPV). For fairness constraints on recall (TPR), see Equality of Opportunity.
+For constraints on both TPR and FPR, see Equality of Odds. These metrics are mathematically incompatible when base rates differ across groups.
+
 % ---------- Calibration within Groups ----------
 \clearpage
 \thispagestyle{biasfairnesstyle}
@@ -203,8 +262,18 @@ Formally, for any score value $s$ and group $a$
 
 % Formula
 \begin{center}
-    % P(Y=1∣S=s,A=a)=s
-    FORMULA GOES HERE
+    \tikz{
+        \node[inner sep=2pt, font=\Large] (a) {
+            {
+                $\displaystyle
+                P({\color{nmlred}Y} = 1 \mid {\color{nmlpurple}S} = s,\, {\color{nmlcyan}A} = a) = s \quad \forall\, s,\, a
+                $
+            }
+        };
+        \draw[-latex,nmlred, semithick] ($(a.north)+(-1.5,-0.1)$) to[bend right=15] node[pos=1, left] {actual outcome} +(-1,.5);
+        \draw[-latex,nmlpurple, semithick] ($(a.north)+(0.5,-0.1)$) to[bend left=15] node[pos=1, right] {predicted score} +(1,.5);
+        \draw[-latex,nmlcyan, semithick] ($(a.south)+(0.5,0.3)$) to[bend left=15] node[pos=1, left] {protected attribute} +(-1,-.5);
+    }
 \end{center}
 
 This means that if a model assigns a score of $s$, then the probability of the outcome being positive should equal $s$,
@@ -230,6 +299,11 @@ making downstream thresholds and policies more reliable.
 \thispagestyle{customstyle}
 
 \orangebox{Did you know that...}
-{Probablity calibration first became popular in weather forecasting. In the 1950s, meteorologists asked whether a 
+{Probability calibration first became popular in weather forecasting. In the 1950s, meteorologists asked whether a 
 “70\% chance of rain” really meant that it rained on 7 out of 10 such days. This led to the creation of the Brier Score in 1950, one of the
 first formal ways to measure how well probabilities match reality, a concept that later inspired calibration metrics in machine learning.}
+
+\textbf{Other related metrics}
+
+For binary outcome fairness rather than score-level fairness, see Demographic Parity, Equality of Opportunity, or Equality of Odds.
+For evaluating calibration quality independently of fairness, see the Brier Score in the Classification chapter.
