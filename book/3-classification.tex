@@ -25,7 +25,7 @@ $
 \vspace{-0.5em}
 
 
-A simple 2x2 example for binary classification with four categories: True Positive (TP), True Negatives (TN), False Positive (FP), False Negative (FN).
+A simple 2x2 example for binary classification with four categories: True Positive (TP), True Negative (TN), False Positive (FP), False Negative (FN).
 
 \newcolumntype{C}[1]{>{\centering\arraybackslash}m{#1}}
 \vspace{0.3em}
@@ -49,8 +49,8 @@ Actual & Predicted \\ \hline
 \begin{tabular}{|C{1.8cm}|C{1.8cm}|C{1.8cm}|}
 \hline
 & Predicted 1 & Predicted 0 \\ \hline
-Actual 1 & \cellcolor{nmlgreen!20}TP = 2 & \cellcolor{nmlred!20}FP = 1 \\ \hline
-Actual 0 & \cellcolor{nmlred!20}FN = 1 & \cellcolor{nmlgreen!20}TN = 2 \\ \hline
+Actual 1 & \cellcolor{nmlgreen!20}TP = 2 & \cellcolor{nmlred!20}FN = 1 \\ \hline
+Actual 0 & \cellcolor{nmlred!20}FP = 1 & \cellcolor{nmlgreen!20}TN = 2 \\ \hline
 \end{tabular}
 \end{minipage}
 
@@ -377,7 +377,7 @@ Specificity is a crucial metric in evaluating diagnostic tests and classificatio
 TNR ranges from 0 to 1, where 1 indicates perfect specificity (all negative instances correctly identified) and 0 (no negative instances were correctly identified).
 In hypothesis testing, specificity is inversely related to the Type I error rate.
 
-\textbf{Why to use TNR?}
+\textbf{When to use TNR?}
 
 When you need to assess a test's ability to identify negative cases correctly or when the cost of false positives is high (e.g., unnecessary medical procedures).
 
@@ -448,13 +448,32 @@ Use accuracy when you need a simple, interpretable metric and your dataset is ba
 \item It doesn't distinguish between different types of errors (false positives vs. false negatives).
 }
 
+\clearpage
+\thispagestyle{customstyle}
+
+\begin{figure*}[ht!]
+    \centering
+    \includegraphics[width=0.6\textwidth]{figures/Accuracy_3d_surface.png}
+\end{figure*}
+
+\textbf{Figure. Accuracy} as a function of TP and TN, with FP + FN fixed at 50. Accuracy increases as the number of correct predictions (TP + TN) grows relative to the total.
+
+\orangebox{Did you know that...}
+{Consider a dataset where 95\% of samples belong to the negative class. A classifier that always predicts negative achieves 95\% accuracy while completely failing
+to identify a single positive case. This is known as the accuracy paradox and is one of the most common pitfalls in classification evaluation.}
+
+\textbf{Other related metrics}
+
+When accuracy is misleading due to class imbalance, consider Balanced Accuracy, the F1-score, MCC, or PR AUC as alternatives.
+These metrics provide a more nuanced view of classifier performance across all classes.
+
 % ---------- Balanced Accuracy ----------
 \clearpage
 \thispagestyle{classificationstyle}
 \section{Balanced Accuracy}
 \subsection{Balanced Accuracy}
 
-Balanced Accuracy is a classification evaluation metric that accounts for class imbalance. In binary classification it can be undertood as the arithmetic mean between
+Balanced Accuracy is a classification evaluation metric that accounts for class imbalance. In binary classification it can be understood as the arithmetic mean between
 specificity and sensitivity (recall). In multi-class classification Balanced Accuracy is the average of the recall obtained in each class, i.e. the macro-average of recall scores per class.
 
 % formula
@@ -474,7 +493,7 @@ specificity and sensitivity (recall). In multi-class classification Balanced Acc
 \end{center}
 
 It is particularly useful when working with datasets where some classes are significantly underrepresented, ensuring that the performance of all classes is treated equally.
-The score ranges from 0 to 1. If the dataset is balance, then Balanced Accuracy score reduces to the conventional Accuracy.
+The score ranges from 0 to 1. If the dataset is balanced, then Balanced Accuracy score reduces to the conventional Accuracy.
 
 \textbf{When to use Balanced Accuracy?}
 
@@ -489,6 +508,18 @@ When dealing with class imbalance. Balanced Accuracy ensures that underrepresent
 \item Under extreme class imbalance or small sample sizes, balanced accuracy can show high variance, as the performance of the minority class has a strong impact on the overall score.
 }
 
+\clearpage
+\thispagestyle{customstyle}
+
+\orangebox{Did you know that...}
+{Balanced Accuracy is mathematically equivalent to the macro-averaged recall. In scikit-learn, you can verify this:
+\texttt{balanced\_accuracy\_score(y, pred)} always equals \texttt{recall\_score(y, pred, average='macro')}.}
+
+\textbf{Other related metrics}
+
+Other metrics designed for imbalanced settings include MCC, the F1-score, and PR AUC.
+If you need to weight classes differently, consider using a weighted average of per-class recall instead.
+
 % ---------- Precision ----------
 \clearpage
 \thispagestyle{classificationstyle}
@@ -496,7 +527,7 @@ When dealing with class imbalance. Balanced Accuracy ensures that underrepresent
 \subsection{Precision}
 
 Precision measures the accuracy of positive predictions made by a classifier. It is the ratio of correctly predicted positive instances (true positives) to
-the total number of instances predicted as positive (true positives + false positives). It answers the question: “Out of all the cases indicated as positive, how many are as actual positives?”
+the total number of instances predicted as positive (true positives + false positives). It answers the question: “Out of all the cases indicated as positive, how many are actual positives?”
 
 % formula
 \begin{center}
@@ -536,6 +567,11 @@ Did you know that...}
     This is known as the Precision-Recall trade-off curve.
 }
 
+\textbf{Other related metrics}
+
+Precision is most commonly used alongside Recall. To combine both into a single metric, use the F1-score or the F-beta score.
+For a threshold-independent evaluation, consider the PR AUC.
+
 % ---------- F1-score ----------
 \clearpage
 \thispagestyle{classificationstyle}
@@ -568,7 +604,7 @@ precision and recall, thus giving equal weight to both these metrics. So, the F1
 The F1-score ranges from 0 to 1. Maximizing precision and recall allows us to approximate a perfect classifier. However, bear in mind that in practice, there is a
 trade-off between precision and recall, so improving precision may inadvertently decrease recall and vice versa.
 
-\textbf{When to use Accuracy?}
+\textbf{When to use F1-score?}
 
 Use the F1-score when you need a balanced measure of a model's performance, with an equal balance between precision and recall (when false positives and negatives are concerns).
 
@@ -581,6 +617,32 @@ Use the F1-score when you need a balanced measure of a model's performance, with
 \item It assumes that precision and recall are equally important. F-beta score can address this by allowing adjustable weighting between precision and recall.
 }
 
+\clearpage
+\thispagestyle{customstyle}
+
+\begin{figure*}[ht!]
+    \centering
+    \includegraphics[width=0.6\textwidth]{figures/F1_3d_surface.png}
+\end{figure*}
+
+\begin{wrapfigure}{r}{0.5\textwidth}
+    \centering
+    \vspace{-10pt}
+    \includegraphics[width=0.45\textwidth]{figures/F1_2d_line_plot.png}
+    \vspace{-10pt}
+\end{wrapfigure}
+
+\textbf{Figure. F1-score.} \underline{Top:} F1 as a function of Precision and Recall. Both must be high for a high F1.
+\underline{Right:} F1 vs Recall at fixed Precision values. Higher Precision shifts the curve upward.
+
+\orangebox{Did you know that...}
+{The F1-score uses the harmonic mean rather than the arithmetic mean because it punishes extreme differences between precision and recall.
+A model with 100\% precision and 1\% recall gets an F1 of only 0.02, whereas its arithmetic mean would be a misleading 50.5\%.}
+
+\textbf{Other related metrics}
+
+When precision and recall are not equally important, use the F-beta score. For a metric that also considers true negatives, consider MCC or the P4-metric.
+
 % ---------- F-beta ----------
 \clearpage
 \thispagestyle{classificationstyle}
@@ -588,7 +650,7 @@ Use the F1-score when you need a balanced measure of a model's performance, with
 \subsection{F-beta}
 
 The F-beta Score is a classification evaluation metric that balances the trade-off between precision and recall, allowing us to give different levels of importance to each.
-It is an extension of the F1-score, where the parameter  determines the weight of recall relative to precision.
+It is an extension of the F1-score, where the parameter $\beta$ determines the weight of recall relative to precision.
 
 % formula
 \begin{center}
@@ -624,13 +686,24 @@ The F-beta Score is particularly useful when Precision and Recall are unequally 
 \item Just like F1-score, F-beta doesn't consider true negatives, which might be necessary in some scenarios.
 }
 
+\clearpage
+\thispagestyle{customstyle}
+
+\orangebox{Did you know that...}
+{Common choices for $\beta$ are: $\beta = 2$ (F2-score), which weights recall twice as much as precision, useful in medical screening where missing a disease
+is worse than a false alarm; and $\beta = 0.5$ (F0.5-score), which weights precision twice as much, useful in search engines where irrelevant results are costly.}
+
+\textbf{Other related metrics}
+
+The F-beta score generalizes the F1-score. If you need a metric that also accounts for true negatives, consider MCC or the P4-metric.
+
 % ---------- ROC AUC ----------
 \clearpage
 \thispagestyle{classificationstyle}
 \section{ROC AUC}
 \subsection{Area Under the Receiver Operating Characteristic Curve}
 
-The Receiver Operating Characteristic (ROC) plot illustrates a classifier's performance at different thresholds. The curve help us undertand the trade-off between FPR
+The Receiver Operating Characteristic (ROC) plot illustrates a classifier's performance at different thresholds. The curve helps us understand the trade-off between FPR
 and TPR at different thresholds. ROC curves can be summarized in a single value by calculating their area under the curve (AUC), which ranges from 0 to 1.0.
 Given one randomly selected positive instance and one randomly chosen negative example, the AUC is the probability that the classifier will be able to tell which is which.
 
@@ -671,6 +744,14 @@ false positives and false negatives are unknown or equally important.
 \item It summarises performance over regions of the ROC space in which one would rarely operate, such as extreme right (high FPR) or extreme left side (low TPR).
 \item ROC AUC doesn't inform about precision and negative predicted value.
 }
+
+\orangebox{Did you know that...}
+{The ROC curve was developed during World War II for analyzing radar signals. Radar operators needed to distinguish between enemy aircraft and noise,
+leading to the development of signal detection theory and the receiver operating characteristic.}
+
+\textbf{Other related metrics}
+
+For imbalanced datasets where the positive class is rare, PR AUC is often preferred over ROC AUC. For a single-threshold evaluation, consider the F1-score or MCC.
 
 % ---------- PR AUC ----------
 \clearpage
@@ -715,6 +796,17 @@ informative measure of a model's ability to detect the minority class without be
 \item It summarises performance over regions of the PR space in which one would rarely operate.
 }
 
+\clearpage
+\thispagestyle{customstyle}
+
+\orangebox{Did you know that...}
+{Unlike ROC AUC where a random classifier always scores 0.5, the baseline for PR AUC depends on the class distribution. For a dataset with 10\% positive class,
+a random classifier's PR AUC baseline is approximately 0.1, not 0.5. This makes PR AUC particularly sensitive to class imbalance.}
+
+\textbf{Other related metrics}
+
+PR AUC is complementary to ROC AUC. For a single-score summary that balances precision and recall at a fixed threshold, use the F1-score.
+For probability calibration assessment, consider the Brier Score or Log Loss.
 
 % ---------- Brier Score Loss ----------
 \clearpage
@@ -752,11 +844,31 @@ When probability calibration is as important as the classification accuracy. Lik
 like risk assessment or decision-making.
 
 \coloredboxes{
-\item Summarices both predictive accuracy and calibration in one value.
+\item Summarizes both predictive accuracy and calibration in one value.
 }
 {
-\item Only suitable for binary tasks. It is inappropriate for ordinal variables which can take three or more values.
+\item Originally designed for binary tasks. Multi-class extensions exist but change the score's range and interpretation.
 }
+
+\clearpage
+\thispagestyle{customstyle}
+
+\begin{figure*}[ht!]
+    \centering
+    \includegraphics[width=0.6\textwidth]{figures/Brier_Score_curves.png}
+\end{figure*}
+
+\textbf{Figure. Brier Score} as a function of predicted probability for both classes. The score is minimized when the predicted probability
+matches the actual outcome (p=1 for actual=1, p=0 for actual=0).
+
+\orangebox{Did you know that...}
+{The Brier Score was introduced by Glenn W. Brier in 1950 for evaluating weather forecasts. It remains one of the most widely used proper scoring rules,
+meaning that it is minimized when the predicted probabilities match the true probabilities of the events.}
+
+\textbf{Other related metrics}
+
+The Brier Score is closely related to Log Loss; both evaluate predicted probabilities. The key difference is that Log Loss more heavily penalizes
+confident wrong predictions. For classification-based (non-probabilistic) evaluation, consider accuracy or F1-score.
 
 % ---------- Log Loss ----------
 \clearpage
@@ -804,6 +916,26 @@ and well-distributed probabilities are important for downstream tasks such as ra
     \item Not suitable if the model doesn't output well-calibrated probabilities.
 }
 
+\clearpage
+\thispagestyle{customstyle}
+
+\begin{figure*}[ht!]
+    \centering
+    \includegraphics[width=0.6\textwidth]{figures/Log_Loss_curves.png}
+\end{figure*}
+
+\textbf{Figure. Log Loss} as a function of predicted probability for both classes. Notice how Log Loss grows unboundedly as the predicted
+probability moves away from the actual outcome, making it much more punishing for confident wrong predictions than the Brier Score.
+
+\orangebox{Did you know that...}
+{Log Loss is mathematically equivalent to the negative log-likelihood of a Bernoulli distribution. This is why maximizing log-likelihood in logistic regression
+is the same as minimizing Log Loss, making it the natural loss function for probabilistic binary classifiers.}
+
+\textbf{Other related metrics}
+
+Log Loss is closely related to the Brier Score; both evaluate probability calibration. For a normalized version, consider the D-squared Log Loss Score.
+When probabilities are not available, use threshold-based metrics like accuracy or F1-score instead.
+
 % ---------- Jaccard Index ----------
 \clearpage
 \thispagestyle{classificationstyle}
@@ -844,9 +976,20 @@ evaluate preferences in recommender systems, or measure the similarity between g
     \item Scale-Invariance. The Jaccard Index is not affected by the size of the sets being compared.
 }
 {
-    \item Can be computationally expensive. Calculating the intersection and union for large or high dimensonal sets can be resource-intensive.
+    \item Can be computationally expensive. Calculating the intersection and union for large or high dimensional sets can be resource-intensive.
 }
 
+\clearpage
+\thispagestyle{customstyle}
+
+\orangebox{Did you know that...}
+{The Jaccard Index was introduced by the Swiss botanist Paul Jaccard in 1901 to compare the similarity of plant species across different regions.
+It is also known as Intersection over Union (IoU) in computer vision, where it is the standard metric for object detection and image segmentation tasks.}
+
+\textbf{Other related metrics}
+
+The Jaccard Index is closely related to the Dice Coefficient (also known as the S\o rensen--Dice coefficient). For two sets A and B:
+$Dice = \frac{2 \cdot |A \cap B|}{|A| + |B|}$. The Jaccard Index and Dice are monotonically related: $Jaccard = \frac{Dice}{2 - Dice}$.
 
 % ---------- D-squared Log Loss Score ----------
 \clearpage
@@ -857,9 +1000,20 @@ evaluate preferences in recommender systems, or measure the similarity between g
 The D-squared score log loss is a normalized version of log loss that provides a more interpretable metric for classification performance, similar to R² for regression.
 It measures the relative improvement of a model's log loss compared to a naive baseline model that always predicts the mean probability.
 
-% 
-FORMULA GOES HERE
-% 
+% formula
+\begin{center}
+    \tikz{
+        \node[inner sep=2pt, font=\Large] (a) {
+            {
+                $\displaystyle
+                D^2 = 1 - \frac{{\color{nmlcyan}L_{\text{model}}}}{{\color{nmlpurple}L_{\text{null}}}}
+                $
+            }
+        };
+        \draw[-latex,nmlcyan, semithick] ($(a.north)+(1.0,-0.1)$) to[bend left=15] node[pos=1, right] {log loss of the model} +(1,.5);
+        \draw[-latex,nmlpurple, semithick] ($(a.south)+(1.0,0.1)$) to[bend left=15] node[pos=1, left] {log loss of the null model} +(-1,-.5);
+    }
+\end{center}
 
 As with R-squared, D-squared ranges from -infinity to 1, where 1 indicates perfect predictions, 0 suggests the model performs no better than the baseline, and negative values indicate
 worse performance than the baseline. The metric provides a standardized way to compare model performance across different datasets and class distributions.
@@ -878,6 +1032,16 @@ datasets or when you want to communicate model performance to non-technical stak
     \item Requires computing the baseline model's performance.
 }
 
+\clearpage
+\thispagestyle{customstyle}
+
+\orangebox{Did you know that...}
+{The D-squared framework generalizes R-squared to any deviance function, not just squared error. In scikit-learn, \texttt{d2\_log\_loss\_score} uses log loss as the deviance,
+but you can also compute D-squared with other losses like absolute error or Poisson deviance.}
+
+\textbf{Other related metrics}
+
+D-squared Log Loss Score is closely related to Log Loss and the R-squared score. For probability calibration, also consider the Brier Score.
 
 % ---------- P4-metric ----------
 \clearpage
@@ -889,15 +1053,27 @@ The P4-metric (also known as Symmetric F) is an evaluation metric for binary cla
 on only some aspects of classification performance, P4 comprehensively considers all four key conditional probabilities in binary classification, making it a
 more balanced measure of classifier performance.
 
-% 
-FORMULA GOES HERE
-% 
+% formula
+\begin{center}
+    \tikz{
+        \node[inner sep=2pt, font=\Large] (a) {
+            {
+                $\displaystyle
+                P4 = \frac{4 \cdot {\color{nmlcyan}TP} \cdot {\color{cyan}TN}}{4 \cdot {\color{nmlcyan}TP} \cdot {\color{cyan}TN} + ({\color{nmlcyan}TP}+{\color{cyan}TN})({\color{nmlpurple}FP}+{\color{nmlpurple}FN})}
+                $
+            }
+        };
+        \draw[-latex,nmlcyan, semithick] ($(a.north)+(0.2,-0.1)$) to[bend right=15] node[pos=1, left] {true positives} +(-1,.5);
+        \draw[-latex,cyan, semithick] ($(a.north)+(1.3,-0.1)$) to[bend left=15] node[pos=1, right] {true negatives} +(1,.5);
+        \draw[-latex,nmlpurple, semithick] ($(a.south)+(3.0,0.3)$) to[bend left=15] node[pos=1, left] {misclassifications (FP, FN)} +(-1,-.5);
+    }
+\end{center}
 
 The metric ranges from 0 to 1, where 1 indicates perfect classification (all probabilities equal 1) and 0 indicates complete failure (any probability equals 0).
 
 \textbf{When to use P4-metric}
 
-Use P4 in scenarios where both positive and negative predictions are equally important. Or in sases where F1 score's limitations (ignoring true negatives)
+Use P4 in scenarios where both positive and negative predictions are equally important. Or in cases where F1 score's limitations (ignoring true negatives)
 could be problematic.
 
 \coloredboxes{
@@ -910,6 +1086,17 @@ could be problematic.
     \item Goes to zero if any of the key probabilities goes to zero. This can be a strength too.
 }
 
+\clearpage
+\thispagestyle{customstyle}
+
+\orangebox{Did you know that...}
+{The P4-metric was introduced by Tharwat (2020) as a response to F1-score's blindness to true negatives. The name P4 comes from the fact that it
+considers all four Probabilities: Precision, Recall (or sensitivity), Specificity, and Negative Predictive Value.}
+
+\textbf{Other related metrics}
+
+Other metrics that address F1's limitation of ignoring true negatives include MCC and Balanced Accuracy. If you need to weight precision and recall differently,
+consider the F-beta score instead.
 
 % ---------- Cohen's Kappa ----------
 \clearpage
@@ -918,11 +1105,22 @@ could be problematic.
 \subsection{Cohen's Kappa}
 
 Cohen's Kappa is a metric that measures inter-rater reliability and agreement between classifiers while accounting for the agreement that could occur by chance.
-This metric is designed to compare labelings by two different human annotators, not like othe metrics that compares a classifier versus a ground truth.
+This metric is designed to compare labelings by two different human annotators, not like other metrics that compare a classifier versus a ground truth.
 
-% 
-FORMULA GOES HERE
-% 
+% formula
+\begin{center}
+    \tikz{
+        \node[inner sep=2pt, font=\Large] (a) {
+            {
+                $\displaystyle
+                \kappa = \frac{{\color{nmlcyan}p_o} - {\color{nmlpurple}p_e}}{{\color{nmlred}1} - {\color{nmlpurple}p_e}}
+                $
+            }
+        };
+        \draw[-latex,nmlcyan, semithick] ($(a.north)+(0.5,-0.1)$) to[bend left=15] node[pos=1, right] {observed agreement} +(1,.5);
+        \draw[-latex,nmlpurple, semithick] ($(a.south)+(0.8,0.2)$) to[bend left=15] node[pos=1, left] {expected agreement by chance} +(-1,-.5);
+    }
+\end{center}
 
 The score ranges from -1 to 1, where 1 indicates perfect agreement, 0 suggests agreement no better than chance, and negative values indicate worse than chance agreement.
 
@@ -935,23 +1133,47 @@ When you want to compute the agreement between two human annotators on a classif
     \item Widely accepted in many fields.
 }
 {
-    \item It is not adviced to use it as a classification metric. Only to measure inter-annotator agreement.
-    \item Some researches argue that the metric is unreliable when dealing with rare events (unbalanced data).
+    \item It is not advised to use it as a classification metric. Only to measure inter-annotator agreement.
+    \item Some researchers argue that the metric is unreliable when dealing with rare events (unbalanced data).
 }
+
+\clearpage
+\thispagestyle{customstyle}
+
+\orangebox{Did you know that...}
+{Cohen's Kappa was introduced by Jacob Cohen in 1960 in his paper \textit{A Coefficient of Agreement for Nominal Scales}. Despite its popularity, Cohen himself
+acknowledged its limitations and later introduced weighted kappa (1968) to handle ordinal categories where some disagreements are worse than others.}
+
+\textbf{Other related metrics}
+
+Other metrics related to Cohen's Kappa include Fleiss' Kappa (for multiple annotators), Scott's Pi, and Krippendorff's Alpha. For classification evaluation rather than
+inter-annotator agreement, consider MCC or Balanced Accuracy instead.
 
 % ---------- MCC ----------
 \clearpage
 \thispagestyle{classificationstyle}
 \section{MCC}
-\subsection{Matthew's Correlation Coefficient}
+\subsection{Matthews Correlation Coefficient}
 
-The Matthew's Correlation Coefficient, also known as Phi coefficient for binary classification, is a measure of association between predicted and actual classifications
+The Matthews Correlation Coefficient, also known as Phi coefficient for binary classification, is a measure of association between predicted and actual classifications
 that is particularly robust to imbalanced datasets. It can be interpreted as a correlation coefficient between binary variables. In binary classification the MCC can
 be written in terms of the confusion matrix elements.
 
-% 
-FORMULA GOES HERE
-% 
+% formula
+\begin{center}
+    \tikz{
+        \node[inner sep=2pt, font=\Large] (a) {
+            {
+                $\displaystyle
+                MCC = \frac{{\color{nmlcyan}TP} \cdot {\color{cyan}TN} - {\color{nmlpurple}FP} \cdot {\color{nmlpurple}FN}}{\sqrt{({\color{nmlcyan}TP}+{\color{nmlpurple}FP})({\color{nmlcyan}TP}+{\color{nmlpurple}FN})({\color{cyan}TN}+{\color{nmlpurple}FP})({\color{cyan}TN}+{\color{nmlpurple}FN})}}
+                $
+            }
+        };
+        \draw[-latex,nmlcyan, semithick] ($(a.north)+(-0.2,-0.1)$) to[bend right=15] node[pos=1, left] {true positives} +(-1,.5);
+        \draw[-latex,cyan, semithick] ($(a.north)+(1.2,-0.1)$) to[bend left=15] node[pos=1, right] {true negatives} +(1,.5);
+        \draw[-latex,nmlpurple, semithick] ($(a.south)+(0.5,0.3)$) to[bend left=15] node[pos=1, left] {misclassifications (FP, FN)} +(-1,-.5);
+    }
+\end{center}
 
 The coefficient ranges from -1 to 1, where 1 represents perfect prediction, 0 indicates random prediction, and -1 represents total disagreement between prediction and
 observation.
@@ -969,6 +1191,25 @@ negative class performance.
     \item More complex to interpret than simpler metrics like accuracy or F1-score.
 }
 
+\clearpage
+\thispagestyle{customstyle}
+
+\begin{figure*}[ht!]
+    \centering
+    \includegraphics[width=0.6\textwidth]{figures/MCC_3d_surface.png}
+\end{figure*}
+
+\textbf{Figure. MCC} as a function of TP and FP, with FN=20 and TN=80 fixed. MCC increases as true positives grow and decreases as
+false positives accumulate. Notice MCC can become negative when the classifier performs worse than random.
+
+\orangebox{Did you know that...}
+{MCC was introduced by biochemist Brian W. Matthews in 1975 for assessing the quality of protein secondary structure predictions. It has since become one of the most
+recommended metrics in machine learning, with several studies arguing it should replace accuracy and F1-score as the standard evaluation metric for binary classification.}
+
+\textbf{Other related metrics}
+
+Other metrics commonly explored alongside MCC are the F1-score, Cohen's Kappa, and Balanced Accuracy. Unlike F1, MCC takes into account all four confusion matrix categories and is
+generally regarded as a more informative single score for binary classification evaluation.
 
 % ---------- EC ----------
 \clearpage
