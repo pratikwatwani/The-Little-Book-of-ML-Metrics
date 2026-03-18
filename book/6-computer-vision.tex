@@ -96,6 +96,13 @@ To compensate for this, Mean Pixel Accuracy (MPA), calculates accuracy per class
 This adjustment ensures that smaller classes are not overshadowed by dominant ones, making MPA a more balanced evaluation
 metric in class-imbalanced datasets.
 
+\begin{figure*}[ht!]
+    \centering
+    \includegraphics[width=\textwidth]{figures/Pixel_Accuracy_imbalance.png}
+\end{figure*}
+
+\textbf{Figure.} When background dominates (85\%), Pixel Accuracy can be misleadingly high (90\%) even if minority classes are poorly segmented. Mean Pixel Accuracy (55\%) reveals the true performance.
+
 \orangebox{Did you know that...}
 {Pixel Accuracy is part of a family of semantic segmentation evaluation metrics. 
 This family includes several related measures that each capture different aspects of performance.
@@ -225,6 +232,15 @@ challenging.
 }
 
 \clearpage
+\thispagestyle{customstyle}
+
+\begin{figure*}[ht!]
+    \centering
+    \includegraphics[width=0.6\textwidth]{figures/OKS_gaussian_falloff.png}
+\end{figure*}
+
+\textbf{Figure.} OKS applies a Gaussian falloff to localization errors. Strict keypoints (eyes, k=0.05) require precise predictions, while lenient keypoints (hips, k=0.20) tolerate larger errors.
+
 \orangebox{Did you know that...}
 {OKS is the standard metric for evaluating pose estimation models in the COCO Keypoint Challenge, influencing the development
 of state-of-the-art architectures like OpenPose, HRNet, and DEKR.}
@@ -397,6 +413,13 @@ is poor, which matters in precise applications like medical imaging.
 
 \thispagestyle{customstyle}
 
+\begin{figure*}[ht!]
+    \centering
+    \includegraphics[width=\textwidth]{figures/Dice_overlap_examples.png}
+\end{figure*}
+
+\textbf{Figure.} Dice coefficient for three levels of overlap between predicted (purple) and ground truth (cyan/red) segmentation masks. The intersection (cyan) drives the score.
+
 \orangebox{Did you know that...}
 {The S{\o}rensen–Dice coefficient was first introduced in ecology as a way to measure the similarity
 between populations of flora and fauna.}
@@ -469,6 +492,13 @@ which can matter in domains like medical imaging.
 
 \thispagestyle{customstyle}
 
+\begin{figure*}[ht!]
+    \centering
+    \includegraphics[width=0.6\textwidth]{figures/PQ_decomposition.png}
+\end{figure*}
+
+\textbf{Figure.} PQ decomposition into Segmentation Quality (SQ) and Recognition Quality (RQ). Model B has good segmentation but poor detection; Model C is the opposite. PQ captures both aspects.
+
 \orangebox{Did you know that...}
 {Panoptic Quality was designed not only as a metric but also as a driver for task definition. The authors
 hoped that having a unified metric would accelerate the adoption of panoptic segmentation as a new standard
@@ -535,6 +565,13 @@ like MS-SSIM address this.
 \clearpage
 
 \thispagestyle{customstyle}
+
+\begin{figure*}[ht!]
+    \centering
+    \includegraphics[width=0.6\textwidth]{figures/SSIM_vs_PSNR.png}
+\end{figure*}
+
+\textbf{Figure.} SSIM vs PSNR (normalized) across distortion types. Both metrics degrade with increasing distortion, but SSIM better captures perceptually significant changes like structural damage.
 
 \orangebox{Did you know that...}
 {SSIM was introduced in 2004 by Wang et al. as an alternative to PSNR and MSE, and has since become one of

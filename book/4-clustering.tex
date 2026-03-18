@@ -52,6 +52,13 @@ clusters, as it normalizes the score to a standard range. AMI when you want to a
 \clearpage
 \thispagestyle{customstyle}
 
+\begin{figure*}[ht!]
+    \centering
+    \includegraphics[width=\textwidth]{figures/Clustering_external_metrics_comparison.png}
+\end{figure*}
+
+\textbf{Figure.} Comparison of external clustering metrics on well-separated vs overlapping clusters. All metrics score higher for well-separated data, but MI (unbounded) shows the largest absolute difference.
+
 \orangebox{Did you know that...}
 {Mutual Information comes from information theory, where it measures how much knowing one variable reduces uncertainty about another.
 In clustering, this translates to: how much does knowing the cluster assignment tell us about the true class labels?}
@@ -111,6 +118,13 @@ multiple clusterings is needed. Interpretability and connection to pairwise agre
 \clearpage
 \thispagestyle{customstyle}
 
+\begin{figure*}[ht!]
+    \centering
+    \includegraphics[width=\textwidth]{figures/Clustering_good_vs_bad.png}
+\end{figure*}
+
+\textbf{Figure.} Well-separated clusters (left) yield high RI/ARI scores, while overlapping clusters (right) produce lower scores as more point pairs are incorrectly classified.
+
 \orangebox{Did you know that...}
 {The Rand Index was proposed by William M. Rand in 1971. The Adjusted Rand Index (ARI) correction was later introduced by Hubert and Arabie in 1985 to account
 for the fact that two random clusterings can have a surprisingly high RI simply by chance.}
@@ -165,6 +179,13 @@ optimal number of clusters by maximizing the CH Index across different cluster c
 \clearpage
 \thispagestyle{customstyle}
 
+\begin{figure*}[ht!]
+    \centering
+    \includegraphics[width=0.6\textwidth]{figures/Calinski_Harabasz_elbow.png}
+\end{figure*}
+
+\textbf{Figure.} CH Index vs number of clusters for data with 4 true clusters. The peak at k=4 correctly identifies the optimal cluster count. Higher CH values indicate better-defined clusters.
+
 \orangebox{Did you know that...}
 {The Calinski-Harabasz Index is also known as the Variance Ratio Criterion (VRC). It was introduced by Calinski and Harabasz in 1974 and is one of the
 fastest clustering quality metrics to compute, since it only requires cluster centroids and point-to-centroid distances.}
@@ -210,6 +231,13 @@ complementary evaluation methods.
 
 \clearpage
 \thispagestyle{customstyle}
+
+\begin{figure*}[ht!]
+    \centering
+    \includegraphics[width=0.5\textwidth]{figures/Contingency_Matrix_heatmap.png}
+\end{figure*}
+
+\textbf{Figure.} Contingency Matrix for overlapping clusters. Diagonal entries show correct cluster-class alignments; off-diagonal entries reveal misassignments between clusters and true classes.
 
 \orangebox{Did you know that...}
 {The Contingency Matrix is the foundation for many clustering metrics. Mutual Information, the Rand Index, and the V-Measure can all be derived
@@ -259,6 +287,11 @@ is available.
 \clearpage
 
 \thispagestyle{customstyle}
+
+\begin{figure*}[ht!]
+    \centering
+    \includegraphics[width=0.45\textwidth]{figures/Pair_Confusion_Matrix.png}
+\end{figure*}
 
 Analyse the following example to understand how to build the matrix. Lets say we have the following clustering results.
 
@@ -356,6 +389,13 @@ topic should ideally belong to one cluster.
 
 \thispagestyle{customstyle}
 
+\begin{figure*}[ht!]
+    \centering
+    \includegraphics[width=\textwidth]{figures/Clustering_good_vs_bad.png}
+\end{figure*}
+
+\textbf{Figure.} Well-separated clusters (left) achieve high Completeness: all members of each class end up in the same cluster. Overlapping clusters (right) lower the score as class members scatter across clusters.
+
 \textbf{Other related metrics}
 
 The Completeness Score is best used in conjunction with the Homogeneity Score or V-Measure. While completeness focuses on
@@ -413,6 +453,13 @@ Topic modeling, where documents within a cluster should belong to the same topic
 
 \thispagestyle{customstyle}
 
+\begin{figure*}[ht!]
+    \centering
+    \includegraphics[width=\textwidth]{figures/Clustering_good_vs_bad.png}
+\end{figure*}
+
+\textbf{Figure.} Well-separated clusters (left) achieve high Homogeneity: each cluster contains only one class. Overlapping clusters (right) mix classes within clusters, lowering the score.
+
 \textbf{Other related metrics}
 
 Homogeneity is best used alongside Completeness or V-Measure. While Homogeneity ensures clusters are internally consistent with
@@ -468,6 +515,13 @@ completeness of class representation.
 \clearpage
 
 \thispagestyle{customstyle}
+
+\begin{figure*}[ht!]
+    \centering
+    \includegraphics[width=\textwidth]{figures/Clustering_external_metrics_comparison.png}
+\end{figure*}
+
+\textbf{Figure.} V-Measure (rightmost bars) combines Homogeneity and Completeness. All external metrics score higher for well-separated clusters, with V-Measure providing a balanced view.
 
 \textbf{Other related metrics}
 
@@ -534,6 +588,13 @@ Davies-Bouldin Index is particularly useful when we have ground truth labels and
 \clearpage
 \thispagestyle{customstyle}
 
+\begin{figure*}[ht!]
+    \centering
+    \includegraphics[width=0.6\textwidth]{figures/Davies_Bouldin_elbow.png}
+\end{figure*}
+
+\textbf{Figure.} Davies-Bouldin Index vs number of clusters. The minimum at k=4 identifies the optimal cluster count. Lower values indicate better-separated, more compact clusters.
+
 \orangebox{Did you know that...}
 {The Davies-Bouldin Index was proposed by David L. Davies and Donald W. Bouldin in 1979. Unlike the Silhouette Score which evaluates each data point individually,
 the Davies-Bouldin Index works at the cluster level, making it computationally cheaper for large datasets.}
@@ -589,6 +650,13 @@ known classification. Measuring the similarity between two different clustering 
 \clearpage
 
 \thispagestyle{customstyle}
+
+\begin{figure*}[ht!]
+    \centering
+    \includegraphics[width=\textwidth]{figures/Clustering_external_metrics_comparison.png}
+\end{figure*}
+
+\textbf{Figure.} FMI (third pair of bars) is the geometric mean of precision and recall for point pairs. Like other external metrics, it scores higher for well-separated clusters.
 
 \textbf{Other related metrics}
 
@@ -646,6 +714,13 @@ Use Silhouette Score when the ground truth labels are unknown and the evaluation
 
 \clearpage
 \thispagestyle{customstyle}
+
+\begin{figure*}[ht!]
+    \centering
+    \includegraphics[width=\textwidth]{figures/Silhouette_Score_comparison.png}
+\end{figure*}
+
+\textbf{Figure.} Silhouette plots for well-separated (S=0.88) vs overlapping (S=0.63) clusters. Each horizontal bar represents a data point; wider bars indicate better-assigned points. The dashed line shows the average score.
 
 \orangebox{Did you know that...}
 {The Silhouette Coefficient was introduced by Peter Rousseeuw in 1987. Silhouette plots, which visualize the coefficient for each data point sorted by cluster,

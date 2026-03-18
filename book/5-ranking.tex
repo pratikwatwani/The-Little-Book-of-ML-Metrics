@@ -38,6 +38,13 @@ such as search results, product recommendations, or content feeds.
 \clearpage
 \thispagestyle{customstyle}
 
+\begin{figure*}[ht!]
+    \centering
+    \includegraphics[width=0.6\textwidth]{figures/Hit_Rate_vs_K.png}
+\end{figure*}
+
+\textbf{Figure.} Hit Rate increases with K — larger recommendation lists are more likely to contain at least one relevant item. This curve illustrates the trade-off between list size and recommendation quality.
+
 \orangebox{Did you know that...}
 {The choice of K is often driven by UI design constraints. For example, if a mobile app shows 5 recommendations on screen, Precision@5 directly measures how useful
 that screen is to the user.}
@@ -93,6 +100,13 @@ when evaluating the quality of systems where only the position of the first rele
 \clearpage
 
 \thispagestyle{customstyle}
+
+\begin{figure*}[ht!]
+    \centering
+    \includegraphics[width=0.6\textwidth]{figures/MRR_reciprocal_rank.png}
+\end{figure*}
+
+\textbf{Figure.} Reciprocal Rank drops rapidly as the first relevant result moves down the list. A relevant item at rank 1 scores 1.0, at rank 5 it scores 0.2, and beyond rank 10 the score is negligible.
 
 \textbf{Other related metrics}
 
@@ -150,6 +164,13 @@ and precision at various cutoffs matters more than recall.
 
 \clearpage
 \thispagestyle{customstyle}
+
+\begin{figure*}[ht!]
+    \centering
+    \includegraphics[width=\textwidth]{figures/MAP_good_vs_bad.png}
+\end{figure*}
+
+\textbf{Figure.} A good ranking (left, AP=0.94) places relevant items at the top, while a poor ranking (right, AP=0.36) buries them at the bottom.
 
 \orangebox{Did you know that...}
 {MAP is one of the most popular metrics in the TREC (Text REtrieval Conference) evaluations, which have been benchmarking information retrieval systems since 1992.}
@@ -215,6 +236,13 @@ where delivering at least one relevant recommendation is critical, rather than r
 \clearpage
 \thispagestyle{customstyle}
 
+\begin{figure*}[ht!]
+    \centering
+    \includegraphics[width=0.6\textwidth]{figures/Hit_Rate_vs_K.png}
+\end{figure*}
+
+\textbf{Figure.} Hit Rate increases with K. At K=1, only 15\% of users get a relevant recommendation; at K=50, 96\% do.
+
 \orangebox{Did you know that...}
 {Hit Rate is sometimes called Recall@K in the recommender systems literature, though technically Recall@K measures the fraction of all relevant items
 found in the top-K, while Hit Rate is a binary per-user measure.}
@@ -269,6 +297,13 @@ It can be applied in scenarios where all retrieved relevant items are equally im
 \clearpage
 \thispagestyle{customstyle}
 
+\begin{figure*}[ht!]
+    \centering
+    \includegraphics[width=0.6\textwidth]{figures/CG_vs_DCG.png}
+\end{figure*}
+
+\textbf{Figure.} CG (red) accumulates relevance without considering position, while DCG (blue) discounts later positions. The gap between curves shows how much position weighting matters.
+
 \orangebox{Did you know that...}
 {CG is the simplest member of the CG family. It serves mainly as a building block for DCG and nDCG rather than being used as a standalone evaluation metric.}
 
@@ -318,6 +353,13 @@ useful for search engines, recommendation systems, and ranking models where plac
 
 \clearpage
 \thispagestyle{customstyle}
+
+\begin{figure*}[ht!]
+    \centering
+    \includegraphics[width=0.6\textwidth]{figures/CG_vs_DCG.png}
+\end{figure*}
+
+\textbf{Figure.} DCG (blue) applies logarithmic discounting, giving more weight to items ranked higher. CG (red) treats all positions equally, making DCG a more realistic measure.
 
 \orangebox{Did you know that...}
 {The logarithmic discount in DCG was introduced by J\"{a}rvelin and Kek\"{a}l\"{a}inen in 2002. The choice of $\log_2$ is conventional but arbitrary — some implementations use natural log or $\log_{10}$.}
@@ -370,6 +412,13 @@ It is widely used in search engines, recommender systems, and ranking models whe
 
 \clearpage
 \thispagestyle{customstyle}
+
+\begin{figure*}[ht!]
+    \centering
+    \includegraphics[width=0.6\textwidth]{figures/nDCG_degradation.png}
+\end{figure*}
+
+\textbf{Figure.} nDCG decreases as we progressively degrade the ranking by random swaps. A perfect ranking scores 1.0; each swap moves relevant items away from their ideal positions.
 
 \orangebox{Did you know that...}
 {nDCG is the standard offline evaluation metric at most major tech companies for search and recommendation systems. It is also the primary metric
@@ -429,6 +478,13 @@ inferred from interactions.
 
 \clearpage
 \thispagestyle{customstyle}
+
+\begin{figure*}[ht!]
+    \centering
+    \includegraphics[width=\textwidth]{figures/FCP_comparison.png}
+\end{figure*}
+
+\textbf{Figure.} A good ranking (left, FCP=0.90) shows predicted ranks closely matching true preferences. A poor ranking (right, FCP=0.20) shows little agreement.
 
 \orangebox{Did you know that...}
 {FCP is closely related to Kendall's tau rank correlation coefficient. Both measure pairwise agreement in rankings, but FCP is expressed as a proportion
@@ -490,6 +546,13 @@ you want to avoid excessive similarity in recommendations.
 \clearpage
 \thispagestyle{customstyle}
 
+\begin{figure*}[ht!]
+    \centering
+    \includegraphics[width=\textwidth]{figures/Diversity_comparison.png}
+\end{figure*}
+
+\textbf{Figure.} High diversity (left) spreads recommendations across multiple genres. Low diversity (right) concentrates all recommendations in a single genre.
+
 \orangebox{Did you know that...}
 {Intra-List Diversity (ILD) is the most common formulation of diversity in recommender systems. The choice of dissimilarity function $d(i,j)$
 is crucial — common options include 1 minus cosine similarity of item feature vectors, or genre/category distance.}
@@ -539,6 +602,13 @@ retail platforms where recommending new or niche products rather than just trend
 
 \clearpage
 \thispagestyle{customstyle}
+
+\begin{figure*}[ht!]
+    \centering
+    \includegraphics[width=0.6\textwidth]{figures/Novelty_curve.png}
+\end{figure*}
+
+\textbf{Figure.} Novelty as a function of item popularity. Rare items (low popularity) have high novelty, while mainstream items have near-zero novelty.
 
 \orangebox{Did you know that...}
 {The self-information formulation $Novelty(i) = -\log_2 P(i)$ is borrowed from information theory. A popular item with $P(i) = 0.5$ has novelty of 1 bit,
@@ -602,6 +672,13 @@ satisfaction improves when they encounter unexpected but enjoyable suggestions.
 \clearpage
 \thispagestyle{customstyle}
 
+\begin{figure*}[ht!]
+    \centering
+    \includegraphics[width=0.6\textwidth]{figures/Serendipity_scatter.png}
+\end{figure*}
+
+\textbf{Figure.} Each point is a recommended item. Serendipity is highest (dark) when items are both relevant AND unexpected. The upper-right quadrant represents the ideal serendipitous recommendations.
+
 \orangebox{Did you know that...}
 {The term serendipity comes from the 1754 fairy tale "The Three Princes of Serendip." In recommender systems, it captures the idea of
 a "happy accident" — finding something valuable that you weren't looking for.}
@@ -654,6 +731,13 @@ of the available items, users may miss out on relevant but less popular choices.
 
 \clearpage
 \thispagestyle{customstyle}
+
+\begin{figure*}[ht!]
+    \centering
+    \includegraphics[width=0.6\textwidth]{figures/Coverage_comparison.png}
+\end{figure*}
+
+\textbf{Figure.} Three recommender systems with different coverage levels. System A only recommends popular items (12\% of catalog), while System C utilizes 89\% of the full catalog.
 
 \orangebox{Did you know that...}
 {Low coverage is a symptom of the "popularity bias" problem. Some recommender systems end up recommending the same small set of popular items

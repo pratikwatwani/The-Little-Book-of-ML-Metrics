@@ -58,6 +58,13 @@ are segmented (e.g., handling of punctuation, casing, or subword units).
 
 \thispagestyle{customstyle}
 
+\begin{figure*}[ht!]
+    \centering
+    \includegraphics[width=0.6\textwidth]{figures/BLEU_ngram_precision.png}
+\end{figure*}
+
+\textbf{Figure.} N-gram precision drops as n increases. Good translations maintain high precision across all n-gram orders, while poor translations collapse at higher orders where exact phrase matches become rare.
+
 \orangebox{Did you know that...}
 {BLEU was introduced in 2002 by Papineni et al. at IBM and was the first automatic metric to gain
 wide acceptance in machine translation research.}
@@ -125,6 +132,13 @@ rules and synonym dictionaries for the target language.
 
 \thispagestyle{customstyle}
 
+\begin{figure*}[ht!]
+    \centering
+    \includegraphics[width=0.6\textwidth]{figures/METEOR_vs_BLEU.png}
+\end{figure*}
+
+\textbf{Figure.} METEOR vs BLEU across different translation scenarios. METEOR rewards synonyms and paraphrases that BLEU misses, giving a more nuanced evaluation.
+
 \orangebox{Did you know that...}
 {METEOR was developed at Carnegie Mellon University in 2005 as a direct response to BLEU’s shortcomings.}
 
@@ -186,6 +200,13 @@ overlaps (local n-grams, subsequences, or flexible structures).
 
 \thispagestyle{customstyle}
 
+\begin{figure*}[ht!]
+    \centering
+    \includegraphics[width=0.6\textwidth]{figures/ROUGE_variants.png}
+\end{figure*}
+
+\textbf{Figure.} ROUGE recall scores increase as summary length approaches the reference length. ROUGE-1 (unigram) is highest, ROUGE-2 (bigram) lowest, and ROUGE-L (longest common subsequence) falls in between.
+
 \orangebox{Did you know that...}
 {ROUGE was introduced by Chin-Yew Lin in 2004 and quickly became a popular benchmark in text
 summarization challenges. Despite its limitations, it is still one of the most reported
@@ -246,6 +267,13 @@ post-editing effort.
 
 \thispagestyle{customstyle}
 
+\begin{figure*}[ht!]
+    \centering
+    \includegraphics[width=\textwidth]{figures/TER_edit_breakdown.png}
+\end{figure*}
+
+\textbf{Figure.} Edit operation breakdown for good (TER=0.20) vs poor (TER=0.93) translations. A good translation requires minimal edits, while a poor one needs extensive substitutions, insertions, and deletions.
+
 \orangebox{Did you know that...}
 {TER was introduced by Snover et al. (2006) to provide a more human-centered evaluation of
 machine translation.}
@@ -304,6 +332,13 @@ is unacceptable (e.g., API calls, database queries).
 
 \clearpage
 
+\begin{figure*}[ht!]
+    \centering
+    \includegraphics[width=0.6\textwidth]{figures/EM_vs_F1.png}
+\end{figure*}
+
+\textbf{Figure.} EM vs Token F1 across different answer types. EM gives zero credit for partial matches, synonyms, or punctuation differences, while Token F1 provides partial credit.
+
 \orangebox{Did you know that...}
 {Exact Match is one of the core metrics used in the Stanford Question Answering Dataset (SQuAD)
 benchmark. However, because it is so strict, researchers often report both EM and F1 score.
@@ -356,6 +391,13 @@ WER is best used for evaluating ASR systems, voice-to-text tools, and spoken dia
 }
 
 \clearpage
+
+\begin{figure*}[ht!]
+    \centering
+    \includegraphics[width=0.6\textwidth]{figures/WER_vs_errors.png}
+\end{figure*}
+
+\textbf{Figure.} WER as a function of the number of errors for different reference lengths. Shorter references are more sensitive to each error. Note that WER can exceed 100\% when insertions outnumber reference words.
 
 \orangebox{Did you know that...}
 {Word Error Rate is essentially a specialized form of the Levenshtein distance, a string metric introduced in 1965 to measure how many

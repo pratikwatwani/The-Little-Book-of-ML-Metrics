@@ -6,8 +6,9 @@
 \section{MAE}
 \subsection{Mean Absolute Error}
 
-MAE is one of the most popular regression accuracy metrics. It is calculated as the sum of absolute errors divided by the sample size. 
-It is a scale-dependent accuracy measure which means that it uses the same scale as the data being measured.
+MAE is one of the most intuitive regression metrics: it tells you, on average, how far off your predictions are in the same units as your target.
+If you're predicting house prices and your MAE is \$15,000, each prediction is off by \$15K on average. This directness makes MAE the go-to metric
+when you need to communicate model performance to non-technical stakeholders.
 
 % equation
 \begin{center}
@@ -25,23 +26,23 @@ It is a scale-dependent accuracy measure which means that it uses the same scale
     }
 \end{center}
 
-The smaller the MAE, the closer the model's predictions are to the actual targets.
-Theoretically, MAE belongs in the 0 to +infinity range. One of the aspects that makes MAE popular is that it is easy to understand and compute.
+MAE ranges from 0 (perfect) to +infinity. To interpret it in context, compare MAE to the standard deviation of your target:
+MAE $\ll$ std($Y$) suggests a useful model, while MAE $\approx$ std($Y$) means your model is barely better than predicting the mean.
 
 \textbf{When to use MAE?}
 
-Use MAE when you need an interpretable, robust metric that penalizes all errors equally.
-Avoid using it when larger errors need more significant penalization.
+Use MAE for demand forecasting, inventory planning, or any task where over-predicting by 5 is exactly as bad as under-predicting by 5.
+Avoid MAE when large errors are disproportionately costly (use RMSE), when you need scale-free comparison across different targets (use MAPE),
+or when you need a differentiable loss function for training (use MSE).
 
 % strength and weakness box
 \coloredboxes{
-    \item MAE provides an easy-to-understand value since it represents the average error in the same units as the data.
-    \item MAE treats under-predictions and over-predictions equally. Bear in mind that this may not be desirable in all contexts.
+    \item Robust to outliers. Unlike MSE, a single bad prediction doesn't dominate the score. If 99 predictions are off by 1 and one is off by 100, MAE = 1.99 while RMSE = 10.0.
+    \item Directly interpretable. MAE = 5.2 means ``on average, predictions miss by 5.2 units.'' No square roots or percentage conversions needed.
 }
 {
-    \item MAE can be biased when the distribution of errors is skewed, as it does not account for the direction of the error.
-    \item The absolute value function used in MAE is not differentiable at zero, which can pose challenges in optimization
-    and gradient-based learning algorithms.
+    \item All errors are weighted equally. A model with many small errors gets the same MAE as one with fewer but larger errors. If large errors are costly, use RMSE.
+    \item Not differentiable at zero, so it cannot be directly used as a loss function in gradient descent. In practice, Huber loss or smooth L1 are used instead.
 }
 
 \clearpage
@@ -51,31 +52,30 @@ Avoid using it when larger errors need more significant penalization.
 \begin{figure*}[ht!]
     \centering
     \includegraphics[width=0.6\textwidth]{figures/MAE_3d_surface.png}
-    % \caption{Caption}
 \end{figure*}
 
 \begin{wrapfigure}{r}{0.5\textwidth}
     \centering
-    \vspace{-10pt} % Adjust vertical alignment if needed
-    \includegraphics[width=0.45\textwidth]{figures/MAE_cross_section.png} % Your figure goes here
-    \vspace{-10pt} % Adjust vertical alignment if needed
+    \vspace{-10pt}
+    \includegraphics[width=0.45\textwidth]{figures/MAE_cross_section.png}
+    \vspace{-10pt}
 \end{wrapfigure}
 
-% Left text with the image on the right
-\textbf{Figure 3.1 MAE.} \underline{Top:} The rate of change of MAE is linear. 
-Each error contributes proportionally to the total error. 
-\underline{Right:} We can see that MAE is always non-negative, symmetrical,
-and centered around zero. By looking at this plot it is clear that MAE is not differentiable at zero.
+\textbf{Figure. MAE.} \underline{Top:} The rate of change of MAE is linear —
+each error contributes proportionally to the total.
+\underline{Right:} MAE is always non-negative, symmetrical, and centered around zero.
+Unlike MSE's parabola, the V-shape means all errors are penalized equally regardless of magnitude.
 
 \orangebox{Did you know that...}
-{A forecast method that minimizes MAE
-will lead to forecasts of the median.}
-
+{Minimizing MAE leads to predicting the \textbf{median}, while minimizing MSE leads to predicting the \textbf{mean}.
+This is why MAE is more robust to outliers --- the median is less affected by extreme values than the mean. If your target distribution
+is skewed (e.g., income, claim amounts), this distinction matters: MAE and MSE will favor different models.}
 
 \textbf{Other related metrics}
 
-Other metrics commonly explored alongside MAE are Mean Squared Error (MSE), Root Mean Squared Error (RMSE), 
-and Mean Absolute Percentage Error (MAPE).
+If your MAE and RMSE differ significantly, it signals that some predictions have large errors (RMSE amplifies them). A rule of thumb:
+RMSE/MAE close to 1.0 means errors are uniform; RMSE/MAE $\gg$ 1.0 means a few predictions are far off.
+For percentage-based comparison across different-scale targets, use MAPE or sMAPE.
 
 % ---------- MSE ----------
 \clearpage

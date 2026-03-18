@@ -396,6 +396,13 @@ When you need to assess a test's ability to identify negative cases correctly or
 \clearpage
 \thispagestyle{customstyle}
 
+\begin{figure*}[ht!]
+    \centering
+    \includegraphics[width=0.6\textwidth]{figures/TNR_3d_surface.png}
+\end{figure*}
+
+\textbf{Figure.} TNR (Specificity) as a function of TN and FP. TNR increases as more actual negatives are correctly identified.
+
 \orangebox{%
 Did you know that...}
 {
@@ -512,6 +519,13 @@ When dealing with class imbalance. Balanced Accuracy ensures that underrepresent
 \clearpage
 \thispagestyle{customstyle}
 
+\begin{figure*}[ht!]
+    \centering
+    \includegraphics[width=\textwidth]{figures/Balanced_Accuracy_comparison.png}
+\end{figure*}
+
+\textbf{Figure.} On imbalanced data (left), a naive "always negative" classifier gets 95\% accuracy but only 50\% balanced accuracy, exposing its failure. On balanced data (right), both metrics agree.
+
 \orangebox{Did you know that...}
 {Balanced Accuracy is mathematically equivalent to the macro-averaged recall. In scikit-learn, you can verify this:
 \texttt{balanced\_accuracy\_score(y, pred)} always equals \texttt{recall\_score(y, pred, average='macro')}.}
@@ -563,6 +577,13 @@ and in recommendation systems, irrelevant suggestions (false positives) can frus
 
 \clearpage
 \thispagestyle{customstyle}
+
+\begin{figure*}[ht!]
+    \centering
+    \includegraphics[width=0.6\textwidth]{figures/Precision_3d_surface.png}
+\end{figure*}
+
+\textbf{Figure.} Precision as a function of TP and FP. Precision is highest when FP is low relative to TP.
 
 \orangebox{%
 Did you know that...}
@@ -695,6 +716,13 @@ The F-beta Score is particularly useful when Precision and Recall are unequally 
 \clearpage
 \thispagestyle{customstyle}
 
+\begin{figure*}[ht!]
+    \centering
+    \includegraphics[width=0.6\textwidth]{figures/F_beta_curves.png}
+\end{figure*}
+
+\textbf{Figure.} F-beta vs Recall at fixed Precision=0.8. With $\beta=0.5$ (favors precision), the curve is highest. With $\beta=2$ (favors recall), the score increases more steeply with recall.
+
 \orangebox{Did you know that...}
 {Common choices for $\beta$ are: $\beta = 2$ (F2-score), which weights recall twice as much as precision, useful in medical screening where missing a disease
 is worse than a false alarm; and $\beta = 0.5$ (F0.5-score), which weights precision twice as much, useful in search engines where irrelevant results are costly.}
@@ -752,6 +780,13 @@ false positives and false negatives are unknown or equally important.
 \item ROC AUC doesn't inform about precision and negative predicted value.
 }
 
+\begin{figure*}[ht!]
+    \centering
+    \includegraphics[width=0.6\textwidth]{figures/ROC_AUC_curves.png}
+\end{figure*}
+
+\textbf{Figure.} ROC curves for a good model (AUC~0.95, blue) and a weak model (AUC~0.62, red). The dashed diagonal represents random guessing (AUC=0.50). The area under each curve is the AUC.
+
 \orangebox{Did you know that...}
 {The ROC curve was developed during World War II for analyzing radar signals. Radar operators needed to distinguish between enemy aircraft and noise,
 leading to the development of signal detection theory and the receiver operating characteristic.}
@@ -805,6 +840,13 @@ informative measure of a model's ability to detect the minority class without be
 
 \clearpage
 \thispagestyle{customstyle}
+
+\begin{figure*}[ht!]
+    \centering
+    \includegraphics[width=0.6\textwidth]{figures/PR_AUC_curves.png}
+\end{figure*}
+
+\textbf{Figure.} PR curves for a good model (PR AUC~0.85) and a weak model (PR AUC~0.30). A good model maintains high precision even at high recall.
 
 \orangebox{Did you know that...}
 {Unlike ROC AUC where a random classifier always scores 0.5, the baseline for PR AUC depends on the class distribution. For a dataset with 10\% positive class,
@@ -989,6 +1031,13 @@ evaluate preferences in recommender systems, or measure the similarity between g
 \clearpage
 \thispagestyle{customstyle}
 
+\begin{figure*}[ht!]
+    \centering
+    \includegraphics[width=\textwidth]{figures/Jaccard_overlap.png}
+\end{figure*}
+
+\textbf{Figure.} The Jaccard Index measures the overlap between two sets. High overlap (left) yields a high score. Low overlap (right) yields a low score.
+
 \orangebox{Did you know that...}
 {The Jaccard Index was introduced by the Swiss botanist Paul Jaccard in 1901 to compare the similarity of plant species across different regions.
 It is also known as Intersection over Union (IoU) in computer vision, where it is the standard metric for object detection and image segmentation tasks.}
@@ -1041,6 +1090,13 @@ datasets or when you want to communicate model performance to non-technical stak
 
 \clearpage
 \thispagestyle{customstyle}
+
+\begin{figure*}[ht!]
+    \centering
+    \includegraphics[width=0.6\textwidth]{figures/D2_Log_Loss_curve.png}
+\end{figure*}
+
+\textbf{Figure.} D-squared Log Loss Score vs model log loss. D²=1 at zero loss (perfect), D²=0 at the null model's log loss, and negative for worse-than-baseline models.
 
 \orangebox{Did you know that...}
 {The D-squared framework generalizes R-squared to any deviance function, not just squared error. In scikit-learn, \texttt{d2\_log\_loss\_score} uses log loss as the deviance,
@@ -1096,6 +1152,13 @@ could be problematic.
 \clearpage
 \thispagestyle{customstyle}
 
+\begin{figure*}[ht!]
+    \centering
+    \includegraphics[width=0.6\textwidth]{figures/P4_vs_F1.png}
+\end{figure*}
+
+\textbf{Figure.} P4 vs F1 across scenarios. When a model ignores true negatives, F1 stays high but P4 drops significantly, revealing the imbalance that F1 misses.
+
 \orangebox{Did you know that...}
 {The P4-metric was introduced by Tharwat (2020) as a response to F1-score's blindness to true negatives. The name P4 comes from the fact that it
 considers all four Probabilities: Precision, Recall (or sensitivity), Specificity, and Negative Predictive Value.}
@@ -1146,6 +1209,13 @@ When you want to compute the agreement between two human annotators on a classif
 
 \clearpage
 \thispagestyle{customstyle}
+
+\begin{figure*}[ht!]
+    \centering
+    \includegraphics[width=0.6\textwidth]{figures/Cohens_Kappa_levels.png}
+\end{figure*}
+
+\textbf{Figure.} Interpretation scale for Cohen's Kappa, from poor agreement (negative) to almost perfect agreement (0.8--1.0).
 
 \orangebox{Did you know that...}
 {Cohen's Kappa was introduced by Jacob Cohen in 1960 in his paper \textit{A Coefficient of Agreement for Nominal Scales}. Despite its popularity, Cohen himself
@@ -1263,6 +1333,11 @@ EC allows assigning specific costs to each combination of true class and predict
 
 \clearpage
 \thispagestyle{customstyle}
+
+\begin{figure*}[ht!]
+    \centering
+    \includegraphics[width=0.45\textwidth]{figures/EC_cost_matrix.png}
+\end{figure*}
 
 Consider a loan approval scenario with two true classes: $H_1$ (Creditworthy) and $H_2$ (Not Creditworthy), and two decisions: $D_1$ (Approve Loan) and $D_2$ (Reject Loan).
 

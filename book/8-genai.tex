@@ -56,6 +56,13 @@ making perplexity unsuitable for evaluating them.
 
 \thispagestyle{customstyle}
 
+\begin{figure*}[ht!]
+    \centering
+    \includegraphics[width=0.6\textwidth]{figures/Perplexity_training.png}
+\end{figure*}
+
+\textbf{Figure.} Perplexity decreases during training as the model learns to predict text better. It starts high (uncertain) and converges to a low value.
+
 \orangebox{Did you know that...}
 {Perplexity is closely related to entropy in information theory. In fact, $Perplexity = 2^{H(P)}$
 where \(H(P)\) is the entropy. This means that perplexity can be seen as the effective 
@@ -117,6 +124,13 @@ dialogue generation. It is especially useful when generated text can be phrased 
 \clearpage
 
 \thispagestyle{customstyle}
+
+\begin{figure*}[ht!]
+    \centering
+    \includegraphics[width=0.6\textwidth]{figures/BERTScore_vs_BLEU.png}
+\end{figure*}
+
+\textbf{Figure.} BERTScore vs BLEU across translation scenarios. BERTScore rewards synonyms and paraphrases that BLEU misses, while both detect wrong meanings.
 
 \orangebox{Did you know that...}
 {The original BERTScore paper included a picture of Bert from Sesame Street paying homage to the model’s namesake and adding a playful touch to an
@@ -181,6 +195,13 @@ a low score.
 
 \thispagestyle{customstyle}
 
+\begin{figure*}[ht!]
+    \centering
+    \includegraphics[width=0.6\textwidth]{figures/MAUVE_frontier.png}
+\end{figure*}
+
+\textbf{Figure.} MAUVE frontier curves. A good model (blue, MAUVE~0.92) produces text distributions close to human text. A poor model (red, MAUVE~0.65) diverges more. The area under the curve is the MAUVE score.
+
 \orangebox{Did you know that...}
 {MAUVE was introduced in 2021 and quickly became popular because it correlated better with human ratings than older metrics like perplexity.
 It even won a Outstanding Paper Award at NeurIPS 2021.}
@@ -237,6 +258,13 @@ images (e.g., medical scans, satellite imagery).
 \clearpage
 
 \thispagestyle{customstyle}
+
+\begin{figure*}[ht!]
+    \centering
+    \includegraphics[width=0.6\textwidth]{figures/IS_quality_levels.png}
+\end{figure*}
+
+\textbf{Figure.} Inception Score across different generation quality levels. Random noise scores near 1, while state-of-the-art models achieve IS values above 80.
 
 \orangebox{Did you know that...}
 {The Inception Score was introduced in 2016 by Tim Salimans, Ian Goodfellow and colleagues at OpenAI in their paper Improved Techniques
@@ -301,6 +329,13 @@ evaluating models in domain adaptation or zero-shot generation, where the target
 
 \thispagestyle{customstyle}
 
+\begin{figure*}[ht!]
+    \centering
+    \includegraphics[width=0.6\textwidth]{figures/FID_quality_levels.png}
+\end{figure*}
+
+\textbf{Figure.} FID across quality levels (lower is better). State-of-the-art models achieve FID around 5, while random noise exceeds 250.
+
 \orangebox{Did you know that...}
 {The Fréchet Inception Distance gets its name from Maurice Fréchet, a French mathematician who introduced the concept of metric spaces in 1906.
 More than a century later, his work is now central to evaluating the realism of AI-generated images!}
@@ -360,6 +395,13 @@ It is widely used in image generation, style transfer, and super-resolution task
 \clearpage
 
 \thispagestyle{customstyle}
+
+\begin{figure*}[ht!]
+    \centering
+    \includegraphics[width=0.6\textwidth]{figures/LPIPS_vs_L2.png}
+\end{figure*}
+
+\textbf{Figure.} LPIPS (perceptual) vs L2 (pixel) distance for different distortion types. LPIPS correctly ranks structure and texture changes as more perceptually different than color shifts, while L2 does not.
 
 \orangebox{Did you know that...}
 {LPIPS was introduced in 2018 by Richard Zhang and colleagues at UC Berkeley, OpenAI and Adobe. They showed that off-the-shelf deep features—even
@@ -425,6 +467,13 @@ if they mention the right objects.
 \clearpage
 
 \thispagestyle{customstyle}
+
+\begin{figure*}[ht!]
+    \centering
+    \includegraphics[width=0.6\textwidth]{figures/CLIP_Score_scatter.png}
+\end{figure*}
+
+\textbf{Figure.} CLIP Score vs FID for different models. Good models (blue) achieve high CLIP scores (strong text-image alignment) and low FID (realistic images). Poor models (red) score low on both.
 
 \orangebox{Did you know that...}
 {The CLIP Score was introduced in 2022 by researchers at the Allen Institute for AI and The University of Washington and has quickly become a
@@ -547,6 +596,13 @@ or detailed situations. It can also extend to evaluating video and 3D generation
 
 \thispagestyle{customstyle}
 
+\begin{figure*}[ht!]
+    \centering
+    \includegraphics[width=0.6\textwidth]{figures/VQAScore_alignment.png}
+\end{figure*}
+
+\textbf{Figure.} VQAScore drops sharply as the image deviates from the prompt. An exact match scores 0.95, while an unrelated image scores near zero.
+
 \orangebox{Did you know that...}
 {VQAScore was introduced in 2024 by researchers at Carnegie Mellon University in collaboration with Meta.}
 
@@ -603,6 +659,13 @@ text-to-speech or music generation.
 
 \thispagestyle{customstyle}
 
+\begin{figure*}[ht!]
+    \centering
+    \includegraphics[width=\textwidth]{figures/MOS_distributions.png}
+\end{figure*}
+
+\textbf{Figure.} Distribution of listener ratings for high-quality (left, MOS=4.7) vs low-quality (right, MOS=1.9) audio. The dashed line shows the mean rating.
+
 \orangebox{Did you know that...}
 {MOS was first widely adopted in the telecommunications industry in the 20th century, where human listeners rated the clarity of phone calls.
 It became the gold standard for assessing voice quality long before automated metrics were available, and it is still referenced in
@@ -645,6 +708,13 @@ interpretable score that correlates strongly with human judgments.
 \clearpage
 
 \thispagestyle{customstyle}
+
+\begin{figure*}[ht!]
+    \centering
+    \includegraphics[width=0.6\textwidth]{figures/PESQ_conditions.png}
+\end{figure*}
+
+\textbf{Figure.} PESQ scores under different noise conditions. Clean speech scores 4.5 (excellent), while heavily degraded speech drops to 1.2 (poor).
 
 \orangebox{Did you know that...}
 {PESQ was standardized by the ITU-T in 2001 and quickly became the go-to tool for testing phone call quality worldwide. 
@@ -690,6 +760,13 @@ or distortions. It is particularly relevant for applications like speech enhance
 \clearpage
 
 \thispagestyle{customstyle}
+
+\begin{figure*}[ht!]
+    \centering
+    \includegraphics[width=0.6\textwidth]{figures/STOI_vs_SNR.png}
+\end{figure*}
+
+\textbf{Figure.} STOI follows a sigmoid curve against signal-to-noise ratio. Intelligibility drops sharply below 0 dB SNR and saturates near 1.0 above 20 dB.
 
 \orangebox{Did you know that...}
 {STOI was originally developed at Delft University of Technology in the Netherlands, together with Oticon, a hearing aid company in Denmark.}

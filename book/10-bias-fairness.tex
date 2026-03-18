@@ -53,6 +53,14 @@ primary concern.
 
 \thispagestyle{customstyle}
 
+\begin{figure*}[ht!]
+    \centering
+    \includegraphics[width=\textwidth]{figures/Demographic_Parity.png}
+\end{figure*}
+
+\textbf{Figure. Demographic Parity.} \underline{Left:} All groups receive positive predictions at roughly equal rates (~40\%), satisfying parity.
+\underline{Right:} Group A is selected at 65\% while Groups B and C at 30\% and 20\%, violating parity.
+
 \orangebox{Did you know that...}
 {Demographic parity goes by several other names in the literature, often referred to as statistical parity, group fairness, or even
 independence criterion. Different research communities picked different terms, but they all describe the same idea.}
@@ -111,6 +119,14 @@ is more meaningful than enforcing equal acceptance rates.
 \clearpage
 
 \thispagestyle{customstyle}
+
+\begin{figure*}[ht!]
+    \centering
+    \includegraphics[width=\textwidth]{figures/Equality_of_Opportunity.png}
+\end{figure*}
+
+\textbf{Figure. Equality of Opportunity.} \underline{Left:} All groups have similar TPR (~80\%), meaning qualified individuals are equally likely to be identified.
+\underline{Right:} Group A has 90\% TPR while Group C has only 45\%, meaning qualified individuals in Group C are frequently overlooked.
 
 \orangebox{Did you know that...}
 {Equality of Opportunity was popularized in the 2016 paper “Equality of Opportunity in Supervised Learning” by Hardt, Price, and Srebro. 
@@ -174,6 +190,13 @@ truly creditworthy, but also equally likely to be mistakenly given a loan when t
 \clearpage
 
 \thispagestyle{customstyle}
+
+\begin{figure*}[ht!]
+    \centering
+    \includegraphics[width=\textwidth]{figures/Equality_of_Odds.png}
+\end{figure*}
+
+\textbf{Figure. Equality of Odds.} \underline{Left:} Both TPR and FPR are consistent across groups (fair). \underline{Right:} Group A has high TPR but low FPR, while Group C has low TPR and high FPR — the model performs well only for Group A.
 
 \orangebox{Did you know that...}
 {Equality of Odds was popularized in the 2016 paper “Equality of Opportunity in Supervised Learning” by Hardt, Price, and Srebro. 
@@ -241,6 +264,14 @@ impossible to satisfy both simultaneously.
 
 \thispagestyle{customstyle}
 
+\begin{figure*}[ht!]
+    \centering
+    \includegraphics[width=\textwidth]{figures/Predictive_Parity.png}
+\end{figure*}
+
+\textbf{Figure. Predictive Parity.} \underline{Left:} All groups have similar PPV (~74\%), meaning a positive prediction is equally trustworthy across groups.
+\underline{Right:} A positive prediction for Group A is correct 85\% of the time but only 40\% for Group C.
+
 \orangebox{Did you know that...}
 {Predictive parity gained attention during the debate around the COMPAS recidivism tool. ProPublica’s 2016 investigation argued that COMPAS was
 unfair because it did not satisfy equalized odds, while its developers countered that the tool did satisfy predictive parity, illustrating how
@@ -297,6 +328,13 @@ making downstream thresholds and policies more reliable.
 \clearpage
 
 \thispagestyle{customstyle}
+
+\begin{figure*}[ht!]
+    \centering
+    \includegraphics[width=0.6\textwidth]{figures/Calibration_within_Groups.png}
+\end{figure*}
+
+\textbf{Figure. Calibration within Groups.} Group A's calibration curve closely follows the diagonal (well calibrated), while Group B's curve deviates — a predicted score of 0.3 actually corresponds to a 40\% positive rate for Group B, meaning scores have different meanings across groups.
 
 \orangebox{Did you know that...}
 {Probability calibration first became popular in weather forecasting. In the 1950s, meteorologists asked whether a 
