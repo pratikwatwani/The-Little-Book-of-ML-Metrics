@@ -26,8 +26,8 @@ the probability of receiving a positive prediction should be the same across gro
                 $
             }
         };
-        \draw[-latex,nmlpurple, semithick] ($(a.north)+(-1.5,-0.1)$) to[bend right=15] node[pos=1, left] {predicted outcome} +(-1,.5);
-        \draw[-latex,nmlcyan, semithick] ($(a.south)+(-0.3,0.3)$) to[bend left=15] node[pos=1, left] {protected attribute} +(-1,-.5);
+        \draw[overlay,-latex,nmlpurple, semithick] ($(a.north)+(-1.5,-0.1)$) to[bend right=15] node[pos=1, left] {predicted outcome} +(-1,.5);
+        \draw[overlay,-latex,nmlcyan, semithick] ($(a.south)+(-0.3,0.3)$) to[bend left=15] node[pos=1, left] {protected attribute} +(-1,-.5);
     }
 \end{center}
 
@@ -82,9 +82,9 @@ Formally, the metric requires that the True Positive Rate (TPR) be equal across 
                 $
             }
         };
-        \draw[-latex,nmlpurple, semithick] ($(a.north)+(-2.0,-0.1)$) to[bend right=15] node[pos=1, left] {predicted outcome} +(-1,.5);
-        \draw[-latex,nmlred, semithick] ($(a.north)+(0.0,-0.1)$) to[bend left=15] node[pos=1, right] {actual outcome} +(1,.5);
-        \draw[-latex,nmlcyan, semithick] ($(a.south)+(0.0,0.3)$) to[bend left=15] node[pos=1, left] {protected attribute} +(-1,-.5);
+        \draw[overlay,-latex,nmlpurple, semithick] ($(a.north)+(-2.0,-0.1)$) to[bend right=15] node[pos=1, left] {predicted outcome} +(-1,.5);
+        \draw[overlay,-latex,nmlred, semithick] ($(a.north)+(0.0,-0.1)$) to[bend left=15] node[pos=1, right] {actual outcome} +(1,.5);
+        \draw[overlay,-latex,nmlcyan, semithick] ($(a.south)+(0.0,0.3)$) to[bend left=15] node[pos=1, left] {protected attribute} +(-1,-.5);
     }
 \end{center}
 
@@ -147,9 +147,9 @@ no matter which group an individual belongs to.
             }
         };
         \node[below=0.1cm of a, font=\normalsize] {$\forall\, y \in \{0, 1\},\; \forall\, a, b$};
-        \draw[-latex,nmlpurple, semithick] ($(a.north)+(-2.0,-0.1)$) to[bend right=15] node[pos=1, left] {predicted outcome} +(-1,.5);
-        \draw[-latex,nmlred, semithick] ($(a.north)+(0.0,-0.1)$) to[bend left=15] node[pos=1, right] {actual outcome} +(1,.5);
-        \draw[-latex,nmlcyan, semithick] ($(a.south)+(0.0,0.6)$) to[bend left=15] node[pos=1, left] {protected attribute} +(-1,-1);
+        \draw[overlay,-latex,nmlpurple, semithick] ($(a.north)+(-2.0,-0.2)$) to[bend right=15] node[pos=1, left] {predicted outcome} +(-1,.5);
+        \draw[overlay,-latex,nmlred, semithick] ($(a.north)+(0.0,-0.2)$) to[bend left=15] node[pos=1, right] {actual outcome} +(1,.5);
+        \draw[overlay,-latex,nmlcyan, semithick] ($(a.south)+(0.0,0.6)$) to[bend left=15] node[pos=1, left] {protected attribute} +(-1,-.7);
     }
 \end{center}
 
@@ -213,9 +213,9 @@ all groups.
                 $
             }
         };
-        \draw[-latex,nmlred, semithick] ($(a.north)+(-2.0,-0.1)$) to[bend right=15] node[pos=1, left] {actual outcome} +(-1,.5);
-        \draw[-latex,nmlpurple, semithick] ($(a.north)+(0.0,-0.1)$) to[bend left=15] node[pos=1, right] {predicted outcome} +(1,.5);
-        \draw[-latex,nmlcyan, semithick] ($(a.south)+(0.0,0.3)$) to[bend left=15] node[pos=1, left] {protected attribute} +(-1,-.5);
+        \draw[overlay,-latex,nmlred, semithick] ($(a.north)+(-2.0,-0.1)$) to[bend right=15] node[pos=1, left] {actual outcome} +(-1,.5);
+        \draw[overlay,-latex,nmlpurple, semithick] ($(a.north)+(0.0,-0.1)$) to[bend left=15] node[pos=1, right] {predicted outcome} +(1,.5);
+        \draw[overlay,-latex,nmlcyan, semithick] ($(a.south)+(0.0,0.3)$) to[bend left=15] node[pos=1, left] {protected attribute} +(-1,-.5);
     }
 \end{center}
 
@@ -270,9 +270,9 @@ Formally, for any score value $s$ and group $a$
                 $
             }
         };
-        \draw[-latex,nmlred, semithick] ($(a.north)+(-1.5,-0.1)$) to[bend right=15] node[pos=1, left] {actual outcome} +(-1,.5);
-        \draw[-latex,nmlpurple, semithick] ($(a.north)+(0.5,-0.1)$) to[bend left=15] node[pos=1, right] {predicted score} +(1,.5);
-        \draw[-latex,nmlcyan, semithick] ($(a.south)+(0.5,0.3)$) to[bend left=15] node[pos=1, left] {protected attribute} +(-1,-.5);
+        \draw[overlay,-latex,nmlred, semithick] ($(a.north)+(-1.5,-0.1)$) to[bend right=15] node[pos=1, left] {actual outcome} +(-1,.5);
+        \draw[overlay,-latex,nmlpurple, semithick] ($(a.north)+(0.5,-0.1)$) to[bend left=15] node[pos=1, right] {predicted score} +(1,.5);
+        \draw[overlay,-latex,nmlcyan, semithick] ($(a.south)+(0.5,0.3)$) to[bend left=15] node[pos=1, left] {protected attribute} +(-1,-.5);
     }
 \end{center}
 

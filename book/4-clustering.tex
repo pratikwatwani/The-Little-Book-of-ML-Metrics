@@ -20,9 +20,9 @@ It's also particularly useful for comparing the similarity between ground-truth 
                 $
             }
         };
-        \draw[-latex,nmlcyan, semithick] ($(a.north)+(-1.5,-0.1)$) to[bend right=15] node[pos=1, left] {true labels} +(-1,.5);
-        \draw[-latex,nmlpurple, semithick] ($(a.north)+(0.0,-0.1)$) to[bend left=15] node[pos=1, right] {predicted labels} +(1,.5);
-        \draw[-latex,nmlred, semithick] ($(a.south)+(0.0,0.3)$) to[bend left=15] node[pos=1, left] {total samples} +(-1,-.5);
+        \draw[overlay,-latex,nmlcyan, semithick] ($(a.north)+(-1.5,-0.1)$) to[bend right=15] node[pos=1, left] {true labels} +(-1,.5);
+        \draw[overlay,-latex,nmlpurple, semithick] ($(a.north)+(0.0,-0.1)$) to[bend left=15] node[pos=1, right] {predicted labels} +(1,.5);
+        \draw[overlay,-latex,nmlred, semithick] ($(a.south)+(0.0,0.3)$) to[bend left=15] node[pos=1, left] {total samples} +(-1,-.5);
     }
 \end{center}
 
@@ -79,8 +79,8 @@ and the true labels or labels coming from a reference clustering.
                 $
             }
         };
-        \draw[-latex,nmlcyan, semithick] ($(a.north)+(0.5,-0.1)$) to[bend right=15] node[pos=1, left] {agreeing pairs} +(-1,.5);
-        \draw[-latex,nmlpurple, semithick] ($(a.south)+(2.0,0.3)$) to[bend left=15] node[pos=1, left] {disagreeing pairs} +(-1,-.5);
+        \draw[overlay,-latex,nmlcyan, semithick] ($(a.north)+(0.5,-0.1)$) to[bend right=15] node[pos=1, left] {agreeing pairs} +(-1,.5);
+        \draw[overlay,-latex,nmlpurple, semithick] ($(a.south)+(2.0,0.3)$) to[bend left=15] node[pos=1, left] {disagreeing pairs} +(-1,-.5);
     }
 \end{center}
 
@@ -139,9 +139,9 @@ dispersion within clusters.
                 $
             }
         };
-        \draw[-latex,nmlcyan, semithick] ($(a.north)+(0.5,-0.1)$) to[bend right=15] node[pos=1, left] {between-cluster sum} +(-1,.5);
-        \draw[-latex,nmlpurple, semithick] ($(a.south)+(0.5,0.3)$) to[bend left=15] node[pos=1, left] {within-cluster sum} +(-1,-.5);
-        \draw[-latex,nmlred, semithick] ($(a.north)+(2.5,-0.1)$) to[bend left=15] node[pos=1, right] {clusters and samples} +(1,.5);
+        \draw[overlay,-latex,nmlcyan, semithick] ($(a.north)+(0.5,-0.1)$) to[bend right=15] node[pos=1, left] {between-cluster sum} +(-1,.5);
+        \draw[overlay,-latex,nmlpurple, semithick] ($(a.south)+(0.5,0.3)$) to[bend left=15] node[pos=1, left] {within-cluster sum} +(-1,-.5);
+        \draw[overlay,-latex,nmlred, semithick] ($(a.north)+(2.5,-0.1)$) to[bend left=15] node[pos=1, right] {clusters and samples} +(1,.5);
     }
 \end{center}
 
@@ -325,8 +325,8 @@ clustering. Completeness is mathematically defined using conditional entropy bet
                 $
             }
         };
-        \draw[-latex,nmlcyan, semithick] ($(a.north)+(1.5,-0.1)$) to[bend left=15] node[pos=1, right] {cond. entropy of clusters} +(1,.5);
-        \draw[-latex,nmlpurple, semithick] ($(a.south)+(2.0,0.3)$) to[bend left=15] node[pos=1, left] {entropy of clusters} +(-1,-.5);
+        \draw[overlay,-latex,nmlcyan, semithick] ($(a.north)+(1.5,-0.1)$) to[bend left=15] node[pos=1, right] {cond. entropy of clusters} +(1,.5);
+        \draw[overlay,-latex,nmlpurple, semithick] ($(a.south)+(2.0,0.3)$) to[bend left=15] node[pos=1, left] {entropy of clusters} +(-1,-.5);
     }
 \end{center}
 
@@ -381,8 +381,8 @@ It is designed to assess the purity of clusters by evaluating the entropy of cla
                 $
             }
         };
-        \draw[-latex,nmlcyan, semithick] ($(a.north)+(1.5,-0.1)$) to[bend left=15] node[pos=1, right] {cond. entropy of classes} +(1,.5);
-        \draw[-latex,nmlpurple, semithick] ($(a.south)+(2.0,0.3)$) to[bend left=15] node[pos=1, left] {entropy of classes} +(-1,-.5);
+        \draw[overlay,-latex,nmlcyan, semithick] ($(a.north)+(1.5,-0.1)$) to[bend left=15] node[pos=1, right] {cond. entropy of classes} +(1,.5);
+        \draw[overlay,-latex,nmlpurple, semithick] ($(a.south)+(2.0,0.3)$) to[bend left=15] node[pos=1, left] {entropy of classes} +(-1,-.5);
     }
 \end{center}
 
@@ -439,9 +439,9 @@ the F-score.
                 $
             }
         };
-        \draw[-latex,nmlcyan, semithick] ($(a.north)+(0.5,-0.1)$) to[bend right=15] node[pos=1, left] {homogeneity} +(-1,.5);
-        \draw[-latex,nmlpurple, semithick] ($(a.north)+(1.5,-0.1)$) to[bend left=15] node[pos=1, right] {completeness} +(1,.5);
-        \draw[-latex,nmlred, semithick] ($(a.south)+(0.0,0.3)$) to[bend left=15] node[pos=1, left] {weighting parameter} +(-1,-.5);
+        \draw[overlay,-latex,nmlcyan, semithick] ($(a.north)+(0.5,-0.1)$) to[bend right=15] node[pos=1, left] {homogeneity} +(-1,.5);
+        \draw[overlay,-latex,nmlpurple, semithick] ($(a.north)+(1.5,-0.1)$) to[bend left=15] node[pos=1, right] {completeness} +(1,.5);
+        \draw[overlay,-latex,nmlred, semithick] ($(a.south)+(0.0,0.3)$) to[bend left=15] node[pos=1, left] {weighting parameter} +(-1,-.5);
     }
 \end{center}
 
@@ -507,8 +507,8 @@ The Davies-Bouldin Index measures the quality of clustering by evaluating the av
     $
     }
     }; 
-    \draw[-latex,nmlpurple, semithick] ($(a.north)+(1.2,0.05)$) to[bend left=15] node[pos=1, right] {cluster diameter} +(1,.5); 
-    \draw[-latex,cyan, semithick] ($(a.south)+(0.6,-0.05)$) to[bend left=15] node[pos=1, left] {distance between centroids} +(-1,-.5); 
+    \draw[overlay,-latex,nmlpurple, semithick] ($(a.north)+(1.2,0.05)$) to[bend left=15] node[pos=1, right] {cluster diameter} +(1,.5); 
+    \draw[overlay,-latex,cyan, semithick] ($(a.south)+(0.6,-0.05)$) to[bend left=15] node[pos=1, left] {distance between centroids} +(-1,-.5); 
     }
 \end{center}
 
@@ -561,8 +561,8 @@ or between a clustering result and a ground-truth classification. It is defined 
                 $
             }
         };
-        \draw[-latex,nmlcyan, semithick] ($(a.north)+(0.0,-0.1)$) to[bend right=15] node[pos=1, left] {correctly paired} +(-1,.5);
-        \draw[-latex,nmlpurple, semithick] ($(a.south)+(1.5,0.3)$) to[bend left=15] node[pos=1, left] {incorrectly paired} +(-1,-.5);
+        \draw[overlay,-latex,nmlcyan, semithick] ($(a.north)+(0.0,-0.1)$) to[bend right=15] node[pos=1, left] {correctly paired} +(-1,.5);
+        \draw[overlay,-latex,nmlpurple, semithick] ($(a.south)+(1.5,0.3)$) to[bend left=15] node[pos=1, left] {incorrectly paired} +(-1,-.5);
     }
 \end{center}
 
@@ -620,9 +620,9 @@ s(i) =
 $
 }
 };
-\draw[-latex,cyan, semithick] ($(a.north)+(-0.9,0.05)$) to[bend right=15] node[pos=1, left] {measures cohesion} +(-1,.5); 
-\draw[-latex,nmlpurple, semithick] ($(a.north)+(0.2,0.05)$) to[bend left=15] node[pos=1, right] {measures separation} +(1,.5); 
-% \draw[-latex,nmlpurple, semithick] ($(b.north)+(0.1,0.05)$) to[bend left=15] node[pos=1, left] {True negatives} +(-1,-.5); 
+\draw[overlay,-latex,cyan, semithick] ($(a.north)+(-0.9,0.05)$) to[bend right=15] node[pos=1, left] {measures cohesion} +(-1,.5); 
+\draw[overlay,-latex,nmlpurple, semithick] ($(a.north)+(0.2,0.05)$) to[bend left=15] node[pos=1, right] {measures separation} +(1,.5); 
+% \draw[overlay,-latex,nmlpurple, semithick] ($(b.north)+(0.1,0.05)$) to[bend left=15] node[pos=1, left] {True negatives} +(-1,-.5); 
 }
 \end{center}
 

@@ -11,7 +11,7 @@ window. By considering only the top-K retrieved items, these metrics provide a m
 as users typically engage with only a limited number of recommendations.
 
 \begin{center}
-    EXAMPLE FORMULA GOES HERE
+    $\displaystyle Precision@K = \frac{|\text{relevant items in top-K}|}{K}$
 \end{center}
 
 Common @K metrics include Precision@K, Recall@K, Mean Reciprocal Rank (MRR@K), and Mean Average Precision (MAP@K).
@@ -35,6 +35,17 @@ such as search results, product recommendations, or content feeds.
     how close it was to inclusion.
 }
 
+\clearpage
+\thispagestyle{customstyle}
+
+\orangebox{Did you know that...}
+{The choice of K is often driven by UI design constraints. For example, if a mobile app shows 5 recommendations on screen, Precision@5 directly measures how useful
+that screen is to the user.}
+
+\textbf{Other related metrics}
+
+Common @K variants include Precision@K, Recall@K, MAP@K, and nDCG@K. For a binary check of whether any relevant item appears, see Hit Rate.
+
 % ---------- Mean Reciprocal Rank ----------
 \clearpage
 \thispagestyle{rankingstyle}
@@ -46,7 +57,17 @@ and recommendation systems. It measures how high the first relevant result appea
 the average reciprocal rank across all queries in a dataset.
 
 \begin{center}
-    FORMULA GOES HERE
+    \tikz{
+        \node[inner sep=2pt, font=\Large] (a) {
+            {
+                $\displaystyle
+                MRR = \frac{1}{{\color{nmlred}|Q|}} \sum_{i=1}^{|Q|} \frac{1}{{\color{nmlcyan}rank_i}}
+                $
+            }
+        };
+        \draw[overlay,-latex,nmlred, semithick] ($(a.south)+(-0.5,0.2)$) to[bend left=15] node[pos=1, left] {number of queries} +(-1,-.5);
+        \draw[overlay,-latex,nmlcyan, semithick] ($(a.north)+(2.0,-0.1)$) to[bend left=15] node[pos=1, right] {first relevant rank} +(1,.5);
+    }
 \end{center}
 
 MRR goes from 0 to 1. Where 0 mean no relevant items exist in the ranked results for all queries and 1 is achieved when the
@@ -91,7 +112,18 @@ both the relevance of the recommended items and the order in which they are pres
 items higher. The MAP is calculated by averaging the Average Precision (AP) across all users or queries. 
 
 \begin{center}
-    FORMULA GOES HERE
+    \tikz{
+        \node[inner sep=2pt, font=\Large] (a) {
+            {
+                $\displaystyle
+                MAP = \frac{1}{{\color{nmlred}|Q|}} \sum_{q=1}^{|Q|} \frac{1}{|{\color{nmlcyan}R_q}|} \sum_{k=1}^{n} {\color{nmlpurple}P(k)} \cdot {\color{nmlcyan}rel(k)}
+                $
+            }
+        };
+        \draw[overlay,-latex,nmlred, semithick] ($(a.south)+(-1.5,0.2)$) to[bend left=15] node[pos=1, left] {number of queries} +(-1,-.5);
+        \draw[overlay,-latex,nmlcyan, semithick] ($(a.north)+(2.0,-0.1)$) to[bend left=15] node[pos=1, right] {relevant items} +(1,.5);
+        \draw[overlay,-latex,nmlpurple, semithick] ($(a.south)+(2.5,0.3)$) to[bend left=15] node[pos=1, left] {precision at $k$} +(-1,-.5);
+    }
 \end{center}
 
 MAP values range from 0 to 1, with 1 indicating a perfect ranking where all relevant items are placed at the top of the list.
@@ -116,6 +148,17 @@ and precision at various cutoffs matters more than recall.
 
 }
 
+\clearpage
+\thispagestyle{customstyle}
+
+\orangebox{Did you know that...}
+{MAP is one of the most popular metrics in the TREC (Text REtrieval Conference) evaluations, which have been benchmarking information retrieval systems since 1992.}
+
+\textbf{Other related metrics}
+
+MAP is closely related to Precision@K and nDCG. Unlike nDCG, MAP assumes binary relevance (relevant or not).
+For a simpler binary check, consider Hit Rate. For position-weighted evaluation with graded relevance, use nDCG.
+
 % good resources for inpiration for visual: https://juneandrews.com/2014/12/15/mean-average-precision-isnt-so-nice/
 % https://sdsawtelle.github.io/blog/output/mean-average-precision-MAP-for-recommender-systems.html
 
@@ -130,7 +173,18 @@ recommendations. It is a binary metric that checks whether at least one of the u
 recommended list. If at least one relevant item appears, it counts as a "hit"; otherwise, it does not.
 
 \begin{center}
-    FORMULA GOES HERE
+    \tikz{
+        \node[inner sep=2pt, font=\Large] (a) {
+            {
+                $\displaystyle
+                Hit\ Rate = \frac{1}{{\color{nmlred}|U|}} \sum_{u=1}^{|U|} {\color{nmlgreen}\mathds{1}}\left(|{\color{nmlcyan}R_u} \cap {\color{nmlpurple}Top\text{-}K_u}| > 0\right)
+                $
+            }
+        };
+        \draw[overlay,-latex,nmlred, semithick] ($(a.south)+(-2.0,0.2)$) to[bend left=15] node[pos=1, left] {number of users} +(-1,-.5);
+        \draw[overlay,-latex,nmlcyan, semithick] ($(a.north)+(2.0,-0.1)$) to[bend right=15] node[pos=1, left] {relevant items} +(-1,.5);
+        \draw[overlay,-latex,nmlpurple, semithick] ($(a.north)+(3.5,-0.1)$) to[bend left=15] node[pos=1, right] {top-K items} +(1,.5);
+    }
 \end{center}
 
 Hit Rate is particularly useful in top-k recommendation scenarios where the primary goal is to ensure that users receive at
@@ -158,6 +212,17 @@ where delivering at least one relevant recommendation is critical, rather than r
     item is found.
 }
 
+\clearpage
+\thispagestyle{customstyle}
+
+\orangebox{Did you know that...}
+{Hit Rate is sometimes called Recall@K in the recommender systems literature, though technically Recall@K measures the fraction of all relevant items
+found in the top-K, while Hit Rate is a binary per-user measure.}
+
+\textbf{Other related metrics}
+
+For a more nuanced evaluation that considers ranking position, use MRR or nDCG. For measuring total relevant items retrieved, use Recall@K.
+
 % ---------- Cumulative Gain ----------
 \clearpage
 \thispagestyle{rankingstyle}
@@ -169,7 +234,17 @@ items in the recommendation list. It provides a simple way to evaluate how much 
 does not consider the position of the relevant items.
 
 \begin{center}
-    FORMULA GOES HERE
+    \tikz{
+        \node[inner sep=2pt, font=\Large] (a) {
+            {
+                $\displaystyle
+                CG_p = \sum_{i=1}^{{\color{nmlred}p}} {\color{nmlcyan}rel_i}
+                $
+            }
+        };
+        \draw[overlay,-latex,nmlred, semithick] ($(a.north)+(0.8,-0.1)$) to[bend left=15] node[pos=1, right] {number of items} +(1,.5);
+        \draw[overlay,-latex,nmlcyan, semithick] ($(a.south)+(1.2,0.2)$) to[bend left=15] node[pos=1, left] {relevance of item $i$} +(-1,-.5);
+    }
 \end{center}
 
 A higher cumulative gain reflects a greater concentration of relevant items in the recommendations,
@@ -186,12 +261,20 @@ It can be applied in scenarios where all retrieved relevant items are equally im
     \item If the order of recommended items does not matter, CG is a reasonable metric.
 }
 {
-    \item It does not penalize relevant items appearing lower in the ranking, which is
-    unrealistic in most real-world applications.
-    \item As with CG, DCG does not provide an upper bound.
+    \item Does not consider the position of relevant items — a relevant item at rank 1 contributes the same as one at rank 100.
+    \item No upper bound — CG values are not normalized, making comparison across queries difficult.
     \item Human data labelers must provide relevance scores to compute the total accumulated relevance.
 }
 
+\clearpage
+\thispagestyle{customstyle}
+
+\orangebox{Did you know that...}
+{CG is the simplest member of the CG family. It serves mainly as a building block for DCG and nDCG rather than being used as a standalone evaluation metric.}
+
+\textbf{Other related metrics}
+
+DCG extends CG by adding position-based discounting. nDCG further normalizes DCG to enable cross-query comparison.
 
 % ---------- Discounted Cumulative Gain ----------
 \clearpage
@@ -203,7 +286,17 @@ Discounted Cumulative Gain (DCG) improves upon CG by introducing a position-base
 It accounts for the fact that relevant items appearing earlier in the list are more valuable than those appearing later.
 
 \begin{center}
-    FORMULA GOES HERE
+    \tikz{
+        \node[inner sep=2pt, font=\Large] (a) {
+            {
+                $\displaystyle
+                DCG_p = \sum_{i=1}^{{\color{nmlred}p}} \frac{{\color{nmlcyan}rel_i}}{{\color{nmlpurple}\log_2(i + 1)}}
+                $
+            }
+        };
+        \draw[overlay,-latex,nmlcyan, semithick] ($(a.north)+(1.0,-0.1)$) to[bend right=15] node[pos=1, left] {relevance of item $i$} +(-1,.5);
+        \draw[overlay,-latex,nmlpurple, semithick] ($(a.south)+(1.5,0.3)$) to[bend left=15] node[pos=1, left] {position discount} +(-1,-.5);
+    }
 \end{center}
 
 This logarithmic discounting ensures that higher-ranked relevant items contribute more to the score.
@@ -219,11 +312,20 @@ useful for search engines, recommendation systems, and ranking models where plac
     real-world relevance.
 }
 {
-    \item It does not penalize relevant items appearing lower in the ranking, which is
-    unrealistic in most real-world applications.
-    \item Like CG, DCG does not provide an upper bound.
+    \item Not normalized — DCG values depend on the number and relevance of items, making cross-query comparison difficult.
     \item Human data labelers must provide relevance scores to compute the total accumulated relevance.
 }
+
+\clearpage
+\thispagestyle{customstyle}
+
+\orangebox{Did you know that...}
+{The logarithmic discount in DCG was introduced by J\"{a}rvelin and Kek\"{a}l\"{a}inen in 2002. The choice of $\log_2$ is conventional but arbitrary — some implementations use natural log or $\log_{10}$.}
+
+\textbf{Other related metrics}
+
+DCG builds on CG by adding position discounting. For a normalized version that enables cross-query comparison, use nDCG.
+For binary relevance, MAP may be a simpler alternative.
 
 % ---------- Normalized Discounted Cumulative Gain ----------
 \clearpage
@@ -236,7 +338,17 @@ Normalized Discounted Cumulative Gain (nDCG) extends DCG by normalizing it relat
 and queries.
 
 \begin{center}
-    FORMULA GOES HERE
+    \tikz{
+        \node[inner sep=2pt, font=\Large] (a) {
+            {
+                $\displaystyle
+                nDCG_p = \frac{{\color{nmlcyan}DCG_p}}{{\color{nmlpurple}IDCG_p}}
+                $
+            }
+        };
+        \draw[overlay,-latex,nmlcyan, semithick] ($(a.north)+(0.8,-0.1)$) to[bend right=15] node[pos=1, left] {actual DCG} +(-1,.5);
+        \draw[overlay,-latex,nmlpurple, semithick] ($(a.south)+(1.0,0.2)$) to[bend left=15] node[pos=1, left] {ideal DCG} +(-1,-.5);
+    }
 \end{center}
 
 IDCG is the DCG computed with an optimally ranked list. nDCG values range from 0 to 1, with 1 indicating a perfect ranking.
@@ -252,13 +364,20 @@ It is widely used in search engines, recommender systems, and ranking models whe
     penalizing poorly ranked relevant items.
 }
 {
-    \item It does not penalize relevant items appearing lower in the ranking, which is
-    unrealistic in most real-world applications.
-    \item Like CG, DCG does not provide an upper bound.
     \item Human data labelers must provide relevance scores to compute the total accumulated relevance.
-    \item Not ideal for binary relevance. NDCG may not be the best fit in scenarios where relevance is strictly binary, as it
-    is designed to handle graded relevance scores.
+    \item Not ideal for binary relevance. nDCG is designed for graded relevance; for binary relevance, MAP may be more appropriate.
 }
+
+\clearpage
+\thispagestyle{customstyle}
+
+\orangebox{Did you know that...}
+{nDCG is the standard offline evaluation metric at most major tech companies for search and recommendation systems. It is also the primary metric
+used in the annual TREC Web Track and in Kaggle recommendation competitions.}
+
+\textbf{Other related metrics}
+
+nDCG is the normalized version of DCG. For binary relevance scenarios, consider MAP. For evaluating only the first relevant result, use MRR.
 
 % great resource: https://aman.ai/recsys/metrics/#normalized-discounted-cumulative-gain-ndcg-1
 
@@ -275,7 +394,17 @@ comparable pairs in a recommendation list. Given a user’s interactions, FCP ch
 item above a less relevant one.
 
 \begin{center}
-    FORMULA GOES HERE
+    \tikz{
+        \node[inner sep=2pt, font=\Large] (a) {
+            {
+                $\displaystyle
+                FCP = \frac{|{\color{nmlcyan}\text{concordant pairs}}|}{|{\color{nmlpurple}\text{comparable pairs}}|}
+                $
+            }
+        };
+        \draw[overlay,-latex,nmlcyan, semithick] ($(a.north)+(0.5,-0.1)$) to[bend right=15] node[pos=1, left] {correctly ordered pairs} +(-1,.5);
+        \draw[overlay,-latex,nmlpurple, semithick] ($(a.south)+(1.0,0.3)$) to[bend left=15] node[pos=1, left] {total comparable pairs} +(-1,-.5);
+    }
 \end{center}
 
 A concordant pair is one where the model correctly ranks a preferred item above a less preferred one. FCP values range from
@@ -298,6 +427,18 @@ inferred from interactions.
     quadratically with dataset size.
 }
 
+\clearpage
+\thispagestyle{customstyle}
+
+\orangebox{Did you know that...}
+{FCP is closely related to Kendall's tau rank correlation coefficient. Both measure pairwise agreement in rankings, but FCP is expressed as a proportion
+while Kendall's tau is normalized to [-1, 1].}
+
+\textbf{Other related metrics}
+
+FCP is a pairwise ranking metric similar to Kendall's tau and Spearman's rank correlation.
+For position-weighted evaluation, use nDCG or MAP instead.
+
 % great references: https://aman.ai/recsys/metrics/#fraction-of-concordant-pairs-fcp
 % https://www.ijcai.org/Proceedings/13/Papers/449.pdf
 
@@ -313,7 +454,17 @@ receiving highly similar items. This helps prevent redundancy and enhances user 
 pairwise dissimilarity between recommended items.
 
 \begin{center}
-    FORMULA GOES HERE
+    \tikz{
+        \node[inner sep=2pt, font=\Large] (a) {
+            {
+                $\displaystyle
+                Diversity = \frac{1}{{\color{nmlred}|L|(|L|-1)}} \sum_{i \in L} \sum_{j \in L, j \neq i} {\color{nmlcyan}d(i, j)}
+                $
+            }
+        };
+        \draw[overlay,-latex,nmlred, semithick] ($(a.south)+(-1.5,0.2)$) to[bend left=15] node[pos=1, left] {list size} +(-1,-.5);
+        \draw[overlay,-latex,nmlcyan, semithick] ($(a.north)+(3.0,-0.1)$) to[bend left=15] node[pos=1, right] {pairwise dissimilarity} +(1,.5);
+    }
 \end{center}
 
 A higher Diversity score indicates that the recommended items are more distinct from one another, whereas a lower score
@@ -335,6 +486,18 @@ you want to avoid excessive similarity in recommendations.
     for the user.
     \item Hard to define optimal diversity. Too much diversity can lead to recommendations that feel random or disconnected.
 }
+
+\clearpage
+\thispagestyle{customstyle}
+
+\orangebox{Did you know that...}
+{Intra-List Diversity (ILD) is the most common formulation of diversity in recommender systems. The choice of dissimilarity function $d(i,j)$
+is crucial — common options include 1 minus cosine similarity of item feature vectors, or genre/category distance.}
+
+\textbf{Other related metrics}
+
+Diversity measures how different items are from each other, while Novelty measures how new items are to the user.
+Serendipity combines both relevance and unexpectedness. Coverage measures catalog utilization.
 
 % ---------- Novelty ----------
 \clearpage
@@ -375,12 +538,22 @@ retail platforms where recommending new or niche products rather than just trend
 
 
 \clearpage
-% FOR SECOND PAGE
+\thispagestyle{customstyle}
+
+\orangebox{Did you know that...}
+{The self-information formulation $Novelty(i) = -\log_2 P(i)$ is borrowed from information theory. A popular item with $P(i) = 0.5$ has novelty of 1 bit,
+while a rare item with $P(i) = 0.01$ has novelty of 6.6 bits.}
+
 \textbf{Novelty vs Diversity}
 
 Novelty focuses on how new or unexpected the recommendations are for the user whereas diversity focuses on how different the
 recommended items are from each other. Both metrics contribute to exploration but in different ways — novelty ensures
 fresh discoveries, while diversity prevents redundancy.
+
+\textbf{Other related metrics}
+
+Novelty is complementary to Diversity and Serendipity. For measuring catalog utilization, see Coverage.
+For accuracy-focused ranking evaluation, use nDCG or MAP.
 
 % ---------- Serendipity ----------
 \clearpage
@@ -394,8 +567,18 @@ based on past behavior, serendipity evaluates how well a system introduces users
 not have easily discovered themselves.
 
 \begin{center}
-    % there are many formulas, we need to figure which one to show. potentially comment on the others.
-    FORMULA GOES HERE
+    \tikz{
+        \node[inner sep=2pt, font=\Large] (a) {
+            {
+                $\displaystyle
+                Serendipity = \frac{1}{{\color{nmlred}N}} \sum_{i=1}^{N} {\color{nmlcyan}rel(i)} \cdot {\color{nmlpurple}unexp(i)}
+                $
+            }
+        };
+        \draw[overlay,-latex,nmlred, semithick] ($(a.south)+(-1.0,0.2)$) to[bend left=15] node[pos=1, left] {number of items} +(-1,-.5);
+        \draw[overlay,-latex,nmlcyan, semithick] ($(a.north)+(1.5,-0.1)$) to[bend right=15] node[pos=1, left] {relevance} +(-1,.5);
+        \draw[overlay,-latex,nmlpurple, semithick] ($(a.north)+(3.0,-0.1)$) to[bend left=15] node[pos=1, right] {unexpectedness} +(1,.5);
+    }
 \end{center}
 
 A high serendipity score means the system provides relevant and pleasantly surprising recommendations, while a low score
@@ -416,6 +599,17 @@ satisfaction improves when they encounter unexpected but enjoyable suggestions.
     \item Trade-off with accuracy. Maximizing serendipity may reduce traditional accuracy metrics.
 }
 
+\clearpage
+\thispagestyle{customstyle}
+
+\orangebox{Did you know that...}
+{The term serendipity comes from the 1754 fairy tale "The Three Princes of Serendip." In recommender systems, it captures the idea of
+a "happy accident" — finding something valuable that you weren't looking for.}
+
+\textbf{Other related metrics}
+
+Serendipity combines relevance (like Precision) with unexpectedness (like Novelty). For measuring variety without
+considering relevance, use Diversity. For catalog breadth, see Coverage.
 
 % ---------- Coverage ----------
 \clearpage
@@ -428,7 +622,17 @@ the item catalog that is being recommended to users, ensuring that recommendatio
 subset of popular items. 
 
 \begin{center}
-    FORMULA GOES HERE
+    \tikz{
+        \node[inner sep=2pt, font=\Large] (a) {
+            {
+                $\displaystyle
+                Coverage = \frac{|{\color{nmlcyan}\text{recommended items}}|}{|{\color{nmlpurple}\text{total catalog}}|}
+                $
+            }
+        };
+        \draw[overlay,-latex,nmlcyan, semithick] ($(a.north)+(0.5,-0.1)$) to[bend right=15] node[pos=1, left] {unique recommended} +(-1,.5);
+        \draw[overlay,-latex,nmlpurple, semithick] ($(a.south)+(1.0,0.3)$) to[bend left=15] node[pos=1, left] {total catalog items} +(-1,-.5);
+    }
 \end{center}
 
 Higher coverage indicates a broader, more diverse recommendation set, while lower coverage suggests a system that primarily
@@ -447,3 +651,15 @@ of the available items, users may miss out on relevant but less popular choices.
 {
     \item Can reduce recommendation accuracy. Expanding recommendations too broadly may lead to less relevant suggestions.
 }
+
+\clearpage
+\thispagestyle{customstyle}
+
+\orangebox{Did you know that...}
+{Low coverage is a symptom of the "popularity bias" problem. Some recommender systems end up recommending the same small set of popular items
+to all users, leaving the long tail of the catalog unexplored.}
+
+\textbf{Other related metrics}
+
+Coverage measures catalog breadth, while Diversity measures within-list variety. For measuring how new items are to individual users, see Novelty.
+For accuracy-focused evaluation, use nDCG or MAP.

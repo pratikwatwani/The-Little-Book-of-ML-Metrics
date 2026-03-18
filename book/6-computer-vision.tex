@@ -10,24 +10,21 @@
 Pixel Accuracy is one of the most straightforward evaluation metrics for image segmentation tasks. It measures the proportion
 of correctly classified pixels across the entire image, comparing the predicted segmentation mask to the ground truth.
 
-\noindent
+\begin{center}
 \tikz{
-
 \node[inner sep=2pt, font=\Large] (a) {
-\centering
 {
 $\displaystyle
 Pixel Accuracy = \frac{\sum_{j=1}^{k} {\color{nmlcyan}n_{jj}}}{\sum_{j=1}^{k} {\color{nmlpurple}t_{j}}}
 $
 }
 };
-\noindent
-\draw[-latex,nmlcyan, semithick] ($(a.north)+(2.5,0.05)$) to[bend left=15] node[pos=1, right] {Correctly Predicted Pixels} +(1,.5); 
-\draw[-latex,nmlpurple, semithick] ($(a.south)+(2.5,-0.05)$) to[bend left=15] node[pos=1, left] {Total Number of Pixels} +(-1,-.5); 
+\draw[overlay,-latex,nmlcyan, semithick] ($(a.north)+(2.5,-0.2)$) to[bend left=15] node[pos=1, right] {Correct pixels} +(1,.5);
+\draw[overlay,-latex,nmlpurple, semithick] ($(a.south)+(2.5,0.1)$) to[bend left=15] node[pos=1, left] {Total pixels} +(-1,-.5);
 }
-\vspace{-0.5\baselineskip} %
+\end{center}
 
-A Pixel Accuracy of 1.0 indicates perfect segmentation incase of balanced dataset, while lower values suggest a higher proportion of misclassified pixels.
+A Pixel Accuracy of 1.0 indicates perfect segmentation in the case of a balanced dataset, while lower values suggest a higher proportion of misclassified pixels.
 
 
 \textbf{When to use Pixel Accuracy?}
@@ -126,11 +123,11 @@ PCK measures the percentage of predicted keypoints that are close enough to thei
         PCK(\alpha) = \frac{1}{\textcolor{nmlgreen}{N}} \sum_{i=1}^{N} 1\!\left(\textcolor{nmlpurple}{d_i} \le \textcolor{nmlyellow}{\alpha L}\right)
         $
     };
-    \draw[-latex,nmlyellow, semithick] ($(a.north)+(0.5,0.05)$) to[bend left=15] 
+    \draw[overlay,-latex,nmlyellow, semithick] ($(a.north)+(0.5,0.05)$) to[bend left=15] 
         node[pos=1, right] {Threshold Radius} +(1,.5); 
-    \draw[-latex,nmlgreen, semithick] ($(a.south)+(-1.15,-0.1)$) to[bend left=15] 
-        node[pos=1, left] {Number of Keypoints} +(-1,-.5); 
-    \draw[-latex,nmlpurple, semithick] ($(a.south)+(1.2,0.05)$) to[bend right=15] 
+    \draw[overlay,-latex,nmlgreen, semithick] ($(a.south)+(-1.15,0.1)$) to[bend left=15]
+        node[pos=1, left] {Num. keypoints} +(-1,-.5);
+    \draw[overlay,-latex,nmlpurple, semithick] ($(a.south)+(1.2,0.05)$) to[bend right=15] 
         node[pos=1, right] {Euclidean Distance} +(1,-.5); 
 }
 \end{center}
@@ -178,6 +175,11 @@ We use a larger $\alpha$ when approximate locations suffice, for example in full
 \orangebox{Did you know that...}
 {A popular variant, \textbf{PCKh}, uses head size as the reference length \(L\). }
 
+\textbf{Other related metrics}
+
+For a continuous similarity score instead of a hard threshold, see Object Keypoint Similarity (OKS).
+PCK variants include PCKh (head-normalized) and PCK@0.2 (fixed threshold at 20\% of torso length).
+
 % ---------- OKS ----------
 \clearpage
 \thispagestyle{cvstyle}
@@ -201,7 +203,7 @@ $
 };
 }
 
-\textbf{When to use OCK?}
+\textbf{When to use OKS?}
 
 OKS is particularly suited for evaluating pose estimation and keypoint-based object detection models, such as: human pose
 estimation, facial landmark detection and benchmarking keypoint models.
@@ -227,6 +229,9 @@ challenging.
 {OKS is the standard metric for evaluating pose estimation models in the COCO Keypoint Challenge, influencing the development
 of state-of-the-art architectures like OpenPose, HRNet, and DEKR.}
 
+\textbf{Other related metrics}
+
+OKS is the continuous counterpart of PCK. For segmentation rather than keypoint evaluation, consider IoU or the Dice Coefficient.
 
 % ---------- PSNR ----------
 \clearpage
@@ -247,9 +252,9 @@ PSNR is a widely used metric that quantifies pixel-level differences.
                 $
             }
         };
-        \draw[-latex,nmlred, semithick] ($(a.north)+(2.1,-0)$) to[bend right=15] node[pos=1, left] {maximum possible pixel}
+        \draw[overlay,-latex,nmlred, semithick] ($(a.north)+(2.1,-0)$) to[bend right=15] node[pos=1, left] {maximum possible pixel}
         +(-1,.5); 
-        \draw[-latex,nmlpurple, semithick] ($(a.south)+(2,-0.1)$) to[bend left=15] node[pos=1, left] {mean squared error}
+        \draw[overlay,-latex,nmlpurple, semithick] ($(a.south)+(2,-0.1)$) to[bend left=15] node[pos=1, left] {mean squared error}
         +(-1,-.5);
     }
 \end{center}
@@ -271,11 +276,11 @@ where given an original image $O$ of size $h \times w$ and a reconstructed image
                 $
             }
         };
-        \draw[-latex,teal!70!green, semithick] ($(a.west)+(1.7,-0.5)$) to[bend left=15] node[pos=1, left] {height} +(-1,-.5); 
-        \draw[-latex,nmlcyan, semithick] ($(a.west)+(2.4,-0.5)$) to[bend right=15] node[pos=1.62, left] {width} +(1,-.5);
-        \draw[-latex,nmlred, semithick] ($(a.south)+(1,0.5)$) to[bend right=15] node[pos=1, right] {original pixel value}
+        \draw[overlay,-latex,teal!70!green, semithick] ($(a.west)+(1.7,-0.3)$) to[bend left=15] node[pos=1, left] {height} +(-1,-.5);
+        \draw[overlay,-latex,nmlcyan, semithick] ($(a.west)+(2.4,-0.3)$) to[bend right=15] node[pos=1, right] {width} +(0.5,-.5);
+        \draw[overlay,-latex,nmlred, semithick] ($(a.south)+(1,0.5)$) to[bend right=15] node[pos=1, right] {original pixel value}
         +(1,-.5);
-        \draw[-latex,nmlpurple, semithick] ($(a.north)+(2.3,-0.4)$) to[bend right=15] node[pos=1, left] {reconstructed pixel
+        \draw[overlay,-latex,nmlpurple, semithick] ($(a.north)+(2.3,-0.4)$) to[bend right=15] node[pos=1, left] {reconstructed pixel
         value} +(-1,.5);    
     }
 \end{center}
@@ -298,7 +303,7 @@ PSNR is often chosen as the first metric to provide an overview of how closely t
 \item Simple and fast to compute.
 }
 {
-\item It is not always align with human perception of image.
+\item It does not always align with human perception of image quality.
 \item PSNR is sensitive to even small global changes in lighting, contrast, or color.
 }
 
@@ -353,7 +358,17 @@ models by comparing the predicted mask against the ground-truth mask.
 
 % equation
 \begin{center}
-    FORMULA GOES HERE
+    \tikz{
+        \node[inner sep=2pt, font=\Large] (a) {
+            {
+                $\displaystyle
+                Dice = \frac{2\, |{\color{nmlcyan}A} \cap {\color{nmlpurple}B}|}{|{\color{nmlcyan}A}| + |{\color{nmlpurple}B}|}
+                $
+            }
+        };
+        \draw[overlay,-latex,nmlcyan, semithick] ($(a.north)+(1.0,-0.1)$) to[bend right=15] node[pos=1, left] {predicted set} +(-1,.5);
+        \draw[overlay,-latex,nmlpurple, semithick] ($(a.north)+(2.0,-0.1)$) to[bend left=15] node[pos=1, right] {ground truth set} +(1,.5);
+    }
 \end{center}
 
 where $A$ is the set of predicted positives and $B$ is the set of true positives.
@@ -364,7 +379,7 @@ equivalent to the F1-score.
 \textbf{When to use S{\o}rensen–Dice Coefficient?}
 
 Use the S{\o}rensen–Dice Coefficient when you need a robust measure of similarity between two binary
-or categorical sets. It is especially popular in immage segmentation, information retrieval and
+or categorical sets. It is especially popular in image segmentation, information retrieval and
 natural language processing.
 
 \coloredboxes{
@@ -386,8 +401,10 @@ is poor, which matters in precise applications like medical imaging.
 {The S{\o}rensen–Dice coefficient was first introduced in ecology as a way to measure the similarity
 between populations of flora and fauna.}
 
-\vspace{-5pt}
+\textbf{Other related metrics}
 
+The Dice coefficient is mathematically equivalent to the F1-score and closely related to the Jaccard Index (IoU):
+$Jaccard = \frac{Dice}{2 - Dice}$. For panoptic segmentation evaluation, see Panoptic Quality (PQ).
 
 % ---------- Panoptic Quality ----------
 % references: 
@@ -405,7 +422,18 @@ PQ evaluates both in a uniform and consistent way.
 
 % equation
 \begin{center}
-    FORMULA GOES HERE
+    \tikz{
+        \node[inner sep=2pt, font=\Large] (a) {
+            {
+                $\displaystyle
+                PQ = \frac{\sum_{(p,g) \in {\color{nmlcyan}TP}} IoU(p,g)}{|{\color{nmlcyan}TP}| + \frac{1}{2}|{\color{nmlpurple}FP}| + \frac{1}{2}|{\color{nmlred}FN}|}
+                $
+            }
+        };
+        \draw[overlay,-latex,nmlcyan, semithick] ($(a.north)+(1.5,-0.1)$) to[bend left=15] node[pos=1, right] {matched segment pairs} +(1,.5);
+        \draw[overlay,-latex,nmlpurple, semithick] ($(a.south)+(1.5,0.3)$) to[bend left=15] node[pos=1, left] {false positives} +(-1,-.5);
+        \draw[overlay,-latex,nmlred, semithick] ($(a.south)+(3.2,0.3)$) to[bend right=15] node[pos=1, right] {false negatives} +(1,-.5);
+    }
 \end{center}
 
 PQ can be decomposed into two interpretable components:
@@ -446,6 +474,10 @@ which can matter in domains like medical imaging.
 hoped that having a unified metric would accelerate the adoption of panoptic segmentation as a new standard
 task in vision research.}
 
+\textbf{Other related metrics}
+
+PQ decomposes into Segmentation Quality (SQ, average IoU of matched segments) and Recognition Quality (RQ, an F1-like score).
+For semantic-only segmentation, use mean IoU. For instance-only, use Average Precision (AP).
 
 % ---------- Structural Similarity Index ----------
 % references: 
@@ -455,7 +487,7 @@ task in vision research.}
 
 \clearpage
 \thispagestyle{cvstyle}
-\section{SSMI}
+\section{SSIM}
 \subsection{Structural Similarity Index}
 
 The Structural Similarity Index Measure (SSIM) is a computer vision metric that evaluates the similarity
@@ -465,7 +497,18 @@ incorporates luminance, contrast, and structural components of the images.
 
 % equation
 \begin{center}
-    FORMULA GOES HERE
+    \tikz{
+        \node[inner sep=2pt, font=\Large] (a) {
+            {
+                $\displaystyle
+                SSIM(x,y) = \frac{(2{\color{nmlcyan}\mu_x}{\color{nmlpurple}\mu_y} + c_1)(2{\color{nmlred}\sigma_{xy}} + c_2)}{({\color{nmlcyan}\mu_x}^2 + {\color{nmlpurple}\mu_y}^2 + c_1)({\color{nmlcyan}\sigma_x}^2 + {\color{nmlpurple}\sigma_y}^2 + c_2)}
+                $
+            }
+        };
+        \draw[overlay,-latex,nmlcyan, semithick] ($(a.north)+(-0.5,-0.1)$) to[bend right=15] node[pos=1, left] {statistics of image $x$} +(-1,.5);
+        \draw[overlay,-latex,nmlpurple, semithick] ($(a.north)+(1.0,-0.1)$) to[bend left=15] node[pos=1, right] {statistics of image $y$} +(1,.5);
+        \draw[overlay,-latex,nmlred, semithick] ($(a.south)+(0.5,0.5)$) to[bend left=15] node[pos=1, left] {cross-covariance} +(-1,-.5);
+    }
 \end{center}
 
 The SSIM score ranges from -1 to 1, with 1 indicating perfect structural similarity. In practice, values
@@ -495,4 +538,9 @@ like MS-SSIM address this.
 
 \orangebox{Did you know that...}
 {SSIM was introduced in 2004 by Wang et al. as an alternative to PSNR and MSE, and has since become one of
-the most cited metrics in image quality assessment research}
+the most cited metrics in image quality assessment research.}
+
+\textbf{Other related metrics}
+
+For pixel-level comparison, see PSNR. For multi-scale perception, consider MS-SSIM. For learned perceptual similarity,
+see LPIPS in the GenAI chapter.

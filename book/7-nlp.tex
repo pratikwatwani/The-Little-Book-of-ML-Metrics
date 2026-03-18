@@ -17,7 +17,18 @@ reference translations by calculating the overlap of n-grams (contiguous sequenc
 
 % equation
 \begin{center}
-    FORMULA GOES HERE
+    \tikz{
+        \node[inner sep=2pt, font=\Large] (a) {
+            {
+                $\displaystyle
+                BLEU = {\color{nmlred}BP} \cdot \exp\left(\sum_{n=1}^{N} {\color{nmlpurple}w_n} \log {\color{nmlcyan}p_n}\right)
+                $
+            }
+        };
+        \draw[overlay,-latex,nmlred, semithick] ($(a.south)+(-1.5,0.3)$) to[bend left=15] node[pos=1, left] {brevity penalty} +(-1,-.5);
+        \draw[overlay,-latex,nmlcyan, semithick] ($(a.north)+(2.5,-0.2)$) to[bend left=15] node[pos=1, right] {n-gram precision} +(1,.5);
+        \draw[overlay,-latex,nmlpurple, semithick] ($(a.south)+(1.0,0.3)$) to[bend right=15] node[pos=1, right] {n-gram weights} +(1,-.5);
+    }
 \end{center}
 
 BLEU ranges from 0 to 1, where 1 indicates a perfect match with the reference.
@@ -51,6 +62,10 @@ are segmented (e.g., handling of punctuation, casing, or subword units).
 {BLEU was introduced in 2002 by Papineni et al. at IBM and was the first automatic metric to gain
 wide acceptance in machine translation research.}
 
+\textbf{Other related metrics}
+
+METEOR addresses BLEU's limitations with synonym matching and stemming. ROUGE focuses on recall rather than precision.
+For learned semantic similarity, see BERTScore in the GenAI chapter.
 
 % ---------- Metric for Evaluation of Translation with Explicit ORdering ----------
 % references:
@@ -68,7 +83,17 @@ synonyms, and paraphrases.
 
 % equation
 \begin{center}
-    FORMULA GOES HERE
+    \tikz{
+        \node[inner sep=2pt, font=\Large] (a) {
+            {
+                $\displaystyle
+                METEOR = (1 - {\color{nmlred}\gamma} \cdot {\color{nmlpurple}frag}^{\beta}) \cdot {\color{nmlcyan}F_{mean}}
+                $
+            }
+        };
+        \draw[overlay,-latex,nmlcyan, semithick] ($(a.north)+(2.5,-0.2)$) to[bend left=15] node[pos=1, right] {harmonic mean} +(1,.5);
+        \draw[overlay,-latex,nmlpurple, semithick] ($(a.south)+(0.5,0.3)$) to[bend left=15] node[pos=1, left] {fragmentation penalty} +(-1,-.5);
+    }
 \end{center}
 
 It then computes a harmonic mean of unigram precision and recall, with
@@ -103,6 +128,10 @@ rules and synonym dictionaries for the target language.
 \orangebox{Did you know that...}
 {METEOR was developed at Carnegie Mellon University in 2005 as a direct response to BLEU’s shortcomings.}
 
+\textbf{Other related metrics}
+
+METEOR improves on BLEU by incorporating synonyms and stemming. For recall-focused evaluation, see ROUGE.
+For edit-distance-based evaluation, see TER.
 
 % ---------- Recall-Oriented Understudy for Gisting Evaluation ----------
 % references:
@@ -121,7 +150,17 @@ the reference is captured by the system output.
 
 % equation
 \begin{center}
-    FORMULA GOES HERE
+    \tikz{
+        \node[inner sep=2pt, font=\Large] (a) {
+            {
+                $\displaystyle
+                ROUGE\text{-}N = \frac{\sum_{s \in Ref} \sum_{gram_n \in s} {\color{nmlcyan}Count_{match}}(gram_n)}{\sum_{s \in Ref} \sum_{gram_n \in s} {\color{nmlpurple}Count}(gram_n)}
+                $
+            }
+        };
+        \draw[overlay,-latex,nmlcyan, semithick] ($(a.north)+(2.0,-0.1)$) to[bend left=15] node[pos=1, right] {matching n-grams} +(1,.5);
+        \draw[overlay,-latex,nmlpurple, semithick] ($(a.south)+(2.0,0.3)$) to[bend left=15] node[pos=1, left] {total reference n-grams} +(-1,-.5);
+    }
 \end{center}
 
 ROUGE scores range between 0 and 1, with higher values indicating higher similarity between the
@@ -152,6 +191,11 @@ overlaps (local n-grams, subsequences, or flexible structures).
 summarization challenges. Despite its limitations, it is still one of the most reported
 metrics in NLP.}
 
+\textbf{Other related metrics}
+
+ROUGE variants include ROUGE-N (n-gram overlap), ROUGE-L (longest common subsequence), and ROUGE-S (skip-bigram).
+For precision-focused evaluation, use BLEU. For semantic similarity, see BERTScore.
+
 % ---------- Translation Error Rate ----------
 % reference: https://aclanthology.org/2006.amta-papers.25.pdf
 \clearpage
@@ -165,7 +209,18 @@ deletions, substitutions, and shifts of word sequences.
 
 % equation
 \begin{center}
-    FORMULA GOES HERE
+    \tikz{
+        \node[inner sep=2pt, font=\Large] (a) {
+            {
+                $\displaystyle
+                TER = \frac{{\color{nmlcyan}\text{insertions}} + {\color{nmlcyan}\text{deletions}} + {\color{nmlcyan}\text{substitutions}} + {\color{nmlpurple}\text{shifts}}}{{\color{nmlred}\text{reference length}}}
+                $
+            }
+        };
+        \draw[overlay,-latex,nmlcyan, semithick] ($(a.north)+(0.0,-0.1)$) to[bend right=15] node[pos=1, left] {word-level edits} +(-1,.5);
+        \draw[overlay,-latex,nmlpurple, semithick] ($(a.north)+(3.0,-0.1)$) to[bend left=15] node[pos=1, right] {sequence shifts} +(1,.5);
+        \draw[overlay,-latex,nmlred, semithick] ($(a.south)+(2.0,0.3)$) to[bend left=15] node[pos=1, left] {words in reference} +(-1,-.5);
+    }
 \end{center}
 
 The score ranges from 0 to +infinity, where 0 indicates a perfect translation (no edits required).
@@ -195,6 +250,11 @@ post-editing effort.
 {TER was introduced by Snover et al. (2006) to provide a more human-centered evaluation of
 machine translation.}
 
+\textbf{Other related metrics}
+
+TER is an edit-distance metric like WER but operates at the word level for translations. Unlike BLEU and METEOR,
+lower TER is better. For speech recognition evaluation, see WER.
+
 % ---------- Exact Match ----------
 % reference: https://nlp.stanford.edu/pubs/rajpurkar2016squad.pdf
 \clearpage
@@ -209,7 +269,18 @@ samples.
 
 % equation
 \begin{center}
-    FORMULA GOES HERE
+    \tikz{
+        \node[inner sep=2pt, font=\Large] (a) {
+            {
+                $\displaystyle
+                EM = \frac{1}{{\color{nmlred}N}} \sum_{i=1}^{N} {\color{nmlgreen}\mathds{1}}({\color{nmlpurple}\hat{y}_i} = {\color{nmlcyan}y_i})
+                $
+            }
+        };
+        \draw[overlay,-latex,nmlred, semithick] ($(a.south)+(-0.5,0.2)$) to[bend left=15] node[pos=1, left] {number of samples} +(-1,-.5);
+        \draw[overlay,-latex,nmlpurple, semithick] ($(a.north)+(1.0,-0.2)$) to[bend right=15] node[pos=1, left] {predicted text} +(-1,.5);
+        \draw[overlay,-latex,nmlcyan, semithick] ($(a.north)+(1.9,-0.2)$) to[bend left=15] node[pos=1, right] {reference text} +(1,.5);
+    }
 \end{center}
 
 EM is considered one of the strictest evaluation metrics since even a small deviation, such as an
@@ -239,6 +310,10 @@ benchmark. However, because it is so strict, researchers often report both EM an
 EM for exact correctness, and F1 to give partial credit when a prediction overlaps significantly with
 the ground truth.}
 
+\textbf{Other related metrics}
+
+EM is the strictest text comparison metric. For partial credit, use token-level F1-score. For n-gram overlap, see BLEU or ROUGE.
+
 % ---------- Word Error Rate ----------
 \clearpage
 \thispagestyle{nlpstyle}
@@ -252,7 +327,17 @@ of words in the reference.
 
 % equation
 \begin{center}
-    FORMULA GOES HERE
+    \tikz{
+        \node[inner sep=2pt, font=\Large] (a) {
+            {
+                $\displaystyle
+                WER = \frac{{\color{nmlcyan}S} + {\color{nmlcyan}D} + {\color{nmlcyan}I}}{{\color{nmlred}N}}
+                $
+            }
+        };
+        \draw[overlay,-latex,nmlcyan, semithick] ($(a.north)+(0.5,-0.1)$) to[bend right=15] node[pos=1, left] {edit operations} +(-1,.5);
+        \draw[overlay,-latex,nmlred, semithick] ($(a.south)+(1.0,0.2)$) to[bend left=15] node[pos=1, left] {words in reference} +(-1,-.5);
+    }
 \end{center}
 
 A WER of 0 indicates a perfect transcription, while higher values mean more errors. Interestingly, WER can even exceed 1 if the number of insertions
@@ -276,3 +361,8 @@ WER is best used for evaluating ASR systems, voice-to-text tools, and spoken dia
 {Word Error Rate is essentially a specialized form of the Levenshtein distance, a string metric introduced in 1965 to measure how many
 single-character edits are needed to transform one word into another. WER applies the same idea at the word level instead of characters,
 counting insertions, deletions, and substitutions of words to compute the distance between the predicted and reference transcriptions.}
+
+\textbf{Other related metrics}
+
+WER is closely related to TER (Translation Error Rate), which adds word-sequence shifts as an edit operation. For character-level evaluation,
+consider Character Error Rate (CER). For semantic evaluation beyond surface-level edits, see BERTScore.

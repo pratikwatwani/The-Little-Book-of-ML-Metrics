@@ -19,7 +19,18 @@ think of it as the “average branching factor” — the number of equally like
 
 % equation
 \begin{center}
-    FORMULA GOES HERE
+    \tikz{
+        \node[inner sep=2pt, font=\Large] (a) {
+            {
+                $\displaystyle
+                \text{PPL} = \exp\left(-\frac{1}{{\color{nmlred}N}} \sum_{i=1}^{N} \log {\color{nmlcyan}p}({\color{nmlpurple}w_i} \mid w_{<i})\right)
+                $
+            }
+        };
+        \draw[overlay,-latex,nmlred, semithick] ($(a.south)+(-0.5,0.2)$) to[bend left=15] node[pos=1, left] {sequence length} +(-1,-.5);
+        \draw[overlay,-latex,nmlcyan, semithick] ($(a.north)+(2.5,-0.3)$) to[bend left=15] node[pos=1, right] {model probability} +(1,.5);
+        \draw[overlay,-latex,nmlpurple, semithick] ($(a.south)+(1.5,0.2)$) to[bend right=15] node[pos=1, right] {token at position $i$} +(1,-.5);
+    }
 \end{center}
 
 A lower perplexity indicates that the model assigns higher probabilities to the observed text, meaning it is less “surprised”.
@@ -50,6 +61,11 @@ making perplexity unsuitable for evaluating them.
 where \(H(P)\) is the entropy. This means that perplexity can be seen as the effective 
 number of equally likely words the model is choosing from at each step!}
 
+\textbf{Other related metrics}
+
+For semantic similarity beyond surface-level prediction, see BERTScore and MAUVE. For evaluating generated text
+quality with human judgments, see MOS.
+
 % ---------- BERTScore ----------
 \clearpage
 \thispagestyle{genaistyle}
@@ -66,7 +82,17 @@ candidate and reference sentences in embedding space.
 
 % equation
 \begin{center}
-    FORMULA GOES HERE
+    \tikz{
+        \node[inner sep=2pt, font=\Large] (a) {
+            {
+                $\displaystyle
+                F_{\text{BERT}} = 2 \cdot \frac{{\color{nmlcyan}P_{\text{BERT}}} \cdot {\color{nmlpurple}R_{\text{BERT}}}}{{\color{nmlcyan}P_{\text{BERT}}} + {\color{nmlpurple}R_{\text{BERT}}}}
+                $
+            }
+        };
+        \draw[overlay,-latex,nmlcyan, semithick] ($(a.north)+(0.5,-0.3)$) to[bend right=15] node[pos=1, left] {embedding precision} +(-1,.5);
+        \draw[overlay,-latex,nmlpurple, semithick] ($(a.north)+(2.5,-0.3)$) to[bend left=15] node[pos=1, right] {embedding recall} +(1,.5);
+    }
 \end{center}
 
 Mathematically, for each token in a candidate sentence, BERTScore finds its most similar token in the reference sentence (and vice versa)
@@ -96,6 +122,11 @@ dialogue generation. It is especially useful when generated text can be phrased 
 {The original BERTScore paper included a picture of Bert from Sesame Street paying homage to the model’s namesake and adding a playful touch to an
 otherwise technical paper.}
 
+\textbf{Other related metrics}
+
+BERTScore provides token-level semantic similarity, complementing surface-level metrics like BLEU and ROUGE (see NLP chapter).
+For distributional comparison of generated text, see MAUVE.
+
 % ---------- MAUVE ----------
 \clearpage
 \thispagestyle{genaistyle}
@@ -113,7 +144,18 @@ using a large language model, and then comparing them. The comparison is done us
 
 % equation
 \begin{center}
-    FORMULA GOES HERE
+    \tikz{
+        \node[inner sep=2pt, font=\Large] (a) {
+            {
+                $\displaystyle
+                \text{MAUVE} = \exp\left(-{\color{nmlcyan}\text{KL}}({\color{nmlpurple}Q} \| {\color{nmlred}R_\lambda})\right)
+                $
+            }
+        };
+        \draw[overlay,-latex,nmlpurple, semithick] ($(a.north)+(1.5,-0.1)$) to[bend right=15] node[pos=1, left] {model distribution} +(-1,.5);
+        \draw[overlay,-latex,nmlred, semithick] ($(a.north)+(2.5,-0.1)$) to[bend left=15] node[pos=1, right] {human-model mixture} +(1,.5);
+        \draw[overlay,-latex,nmlcyan, semithick] ($(a.south)+(-0.5,0.3)$) to[bend left=15] node[pos=1, left] {KL divergence} +(-1,-.5);
+    }
 \end{center}
 
 In simple terms, MAUVE asks: “If I look at a pile of human texts and a pile of model texts, do they look like they came from the same source?”
@@ -143,6 +185,10 @@ a low score.
 {MAUVE was introduced in 2021 and quickly became popular because it correlated better with human ratings than older metrics like perplexity.
 It even won a Outstanding Paper Award at NeurIPS 2021.}
 
+\textbf{Other related metrics}
+
+MAUVE evaluates distributional similarity, complementing BERTScore (token-level) and Perplexity (likelihood-based).
+For image generation rather than text, see FID and IS.
 
 % ---------- Inception Score ---------
 \clearpage
@@ -155,7 +201,17 @@ diversity of generated images by using a pre-trained Inception v3 network.
 
 % equation
 \begin{center}
-    FORMULA GOES HERE
+    \tikz{
+        \node[inner sep=2pt, font=\Large] (a) {
+            {
+                $\displaystyle
+                \text{IS} = \exp\left(\mathbb{E}_{{\color{nmlpurple}x}} \left[{\color{nmlcyan}\text{KL}}(p(y|{\color{nmlpurple}x}) \| p(y))\right]\right)
+                $
+            }
+        };
+        \draw[overlay,-latex,nmlpurple, semithick] ($(a.south)+(0.5,0.3)$) to[bend left=15] node[pos=1, left] {generated image} +(-1,-.5);
+        \draw[overlay,-latex,nmlcyan, semithick] ($(a.north)+(1.5,-0.1)$) to[bend left=15] node[pos=1, right] {KL divergence} +(1,.5);
+    }
 \end{center}
 
 The idea is simple, a good generative model should produce images that are easily classifiable into distinct categories (high confidence
@@ -187,6 +243,11 @@ images (e.g., medical scans, satellite imagery).
 for Training GANs. It quickly became the standard benchmark for evaluating GANs, since it offered one of the first automated ways to score
 generated images without human annotators.}
 
+\textbf{Other related metrics}
+
+IS measures quality and diversity of generated images independently. FID compares generated images against real images,
+making it more reliable. For perceptual similarity, see LPIPS.
+
 % ---------- Fréchet Inception Distance ---------
 \clearpage
 \thispagestyle{genaistyle}
@@ -203,7 +264,17 @@ from a pretrained Inception-v3 network.
 
 % equation
 \begin{center}
-    FORMULA GOES HERE
+    \tikz{
+        \node[inner sep=2pt, font=\Large] (a) {
+            {
+                $\displaystyle
+                \text{FID} = \|{\color{nmlcyan}\mu_r} - {\color{nmlpurple}\mu_g}\|^2 + \text{Tr}\left({\color{nmlcyan}\Sigma_r} + {\color{nmlpurple}\Sigma_g} - 2({\color{nmlcyan}\Sigma_r} {\color{nmlpurple}\Sigma_g})^{1/2}\right)
+                $
+            }
+        };
+        \draw[overlay,-latex,nmlcyan, semithick] ($(a.north)+(-0.5,-0.1)$) to[bend right=15] node[pos=1, left] {real distribution} +(-1,.5);
+        \draw[overlay,-latex,nmlpurple, semithick] ($(a.north)+(1.5,-0.1)$) to[bend left=15] node[pos=1, right] {generated distribution} +(1,.5);
+    }
 \end{center}
 
 Mathematically, it models these feature distributions as multivariate Gaussians and computes the Fréchet distance Wasserstein-2 distanc between them.
@@ -254,7 +325,18 @@ visual recognition. The idea is that these network features capture aspects of v
 
 % equation
 \begin{center}
-    FORMULA GOES HERE
+    \tikz{
+        \node[inner sep=2pt, font=\Large] (a) {
+            {
+                $\displaystyle
+                \text{LPIPS} = \sum_{l} \frac{1}{H_l W_l} \sum_{h,w} \|{\color{nmlred}w_l} \odot ({\color{nmlcyan}\hat{f}^l_{hw}} - {\color{nmlpurple}\hat{g}^l_{hw}})\|^2
+                $
+            }
+        };
+        \draw[overlay,-latex,nmlcyan, semithick] ($(a.north)+(1.5,-0.1)$) to[bend right=15] node[pos=1, left] {features of image $x$} +(-1,.5);
+        \draw[overlay,-latex,nmlpurple, semithick] ($(a.north)+(3.0,-0.1)$) to[bend left=15] node[pos=1, right] {features of image $y$} +(1,.5);
+        \draw[overlay,-latex,nmlred, semithick] ($(a.south)+(0.5,0.3)$) to[bend left=15] node[pos=1, left] {learned weights} +(-1,-.5);
+    }
 \end{center}
 
 LPIPS calculates perceptual similarity between two images using deep network features. Features are extracted from different layers of a
@@ -284,6 +366,10 @@ It is widely used in image generation, style transfer, and super-resolution task
 from different architectures—already align surprisingly well with human perception. Later, they refined the metric by learning weights from
 large-scale human preference studies.}
 
+\textbf{Other related metrics}
+
+LPIPS measures perceptual similarity between two specific images. For distributional comparison across many images, use FID.
+For pixel-level comparison, see PSNR and SSIM in the Computer Vision chapter.
 
 % ---------- CLIPScore ---------
 \clearpage
@@ -302,8 +388,18 @@ rescaled, so higher values indicate stronger alignment between text and image.
 
 % equation
 \begin{center}
-    % CLIP-S(c,v)=w⋅max(cos(c,v),0)
-    FORMULA GOES HERE
+    \tikz{
+        \node[inner sep=2pt, font=\Large] (a) {
+            {
+                $\displaystyle
+                \text{CLIP-S} = {\color{nmlred}w} \cdot \max\left(\cos({\color{nmlcyan}c}, {\color{nmlpurple}v}),\, 0\right)
+                $
+            }
+        };
+        \draw[overlay,-latex,nmlcyan, semithick] ($(a.north)+(1.5,-0.1)$) to[bend right=15] node[pos=1, left] {text embedding} +(-1,.5);
+        \draw[overlay,-latex,nmlpurple, semithick] ($(a.north)+(2.5,-0.1)$) to[bend left=15] node[pos=1, right] {image embedding} +(1,.5);
+        \draw[overlay,-latex,nmlred, semithick] ($(a.south)+(-0.5,0.3)$) to[bend left=15] node[pos=1, left] {scaling weight} +(-1,-.5);
+    }
 \end{center}
 
 A higher CLIP Score indicates better alignment between text and image. The score ranges from 0 (no alignment) up to w (the scaling weight,
@@ -334,6 +430,10 @@ if they mention the right objects.
 {The CLIP Score was introduced in 2022 by researchers at the Allen Institute for AI and The University of Washington and has quickly become a
 standard way to evaluate multimodal AI, thanks to the popularity of CLIP, which was originally developed by OpenAI.}
 
+\textbf{Other related metrics}
+
+CLIP Score measures text-image alignment. For more fine-grained compositional evaluation, see DSG and VQAScore.
+For image quality without text, use FID or IS.
 
 % ---------- Davidsonian Scene Graph ---------
 \clearpage
@@ -387,6 +487,11 @@ relationships, such as “a person holding a red umbrella next to a dog.”
 be broken down into atomic events and their relations. DSG borrows this idea, turning a text prompt into small, testable propositions like
 “there is a cat” or “the cat sits on the chair.”}
 
+\textbf{Other related metrics}
+
+DSG provides fine-grained compositional evaluation. For a simpler text-image alignment score, use CLIP Score.
+For a VQA-based alternative, see VQAScore.
+
 % ---------- Visual Question Answering Score ---------
 \clearpage
 \thispagestyle{genaistyle}
@@ -404,7 +509,18 @@ the moon? Please answer yes or no.”
 % equation
 \begin{center}
     % VQAScore=P(“Yes”∣image,Does this image show ‘prompt’?)
-    FORMULA GOES HERE
+    \tikz{
+        \node[inner sep=2pt, font=\Large] (a) {
+            {
+                $\displaystyle
+                \text{VQAScore} = P({\color{nmlcyan}\text{``Yes''}} \mid {\color{nmlpurple}\text{image}},\, {\color{nmlred}\text{question}})
+                $
+            }
+        };
+        \draw[overlay,-latex,nmlcyan, semithick] ($(a.north)+(0.0,-0.1)$) to[bend right=15] node[pos=1, left] {positive answer} +(-1,.5);
+        \draw[overlay,-latex,nmlpurple, semithick] ($(a.south)+(1.5,0.3)$) to[bend left=15] node[pos=1, left] {generated image} +(-1,-.5);
+        \draw[overlay,-latex,nmlred, semithick] ($(a.north)+(3.0,-0.2)$) to[bend left=15] node[pos=1, right] {prompt question} +(1,.5);
+    }
 \end{center}
 
 Technically, the image and the tokenized question are passed into a VQA system with two parts: an image-question encoder, which fuses visual and
@@ -434,6 +550,9 @@ or detailed situations. It can also extend to evaluating video and 3D generation
 \orangebox{Did you know that...}
 {VQAScore was introduced in 2024 by researchers at Carnegie Mellon University in collaboration with Meta.}
 
+\textbf{Other related metrics}
+
+VQAScore and DSG both evaluate compositional text-image alignment. For a simpler cosine-similarity approach, see CLIP Score.
 
 % ---------- Mean Opinion Score ---------
 \clearpage
@@ -450,7 +569,17 @@ The final score is the average across all listeners.
 
 % equation
 \begin{center}
-    FORMULA GOES HERE
+    \tikz{
+        \node[inner sep=2pt, font=\Large] (a) {
+            {
+                $\displaystyle
+                MOS = \frac{1}{{\color{nmlred}N}} \sum_{i=1}^{N} {\color{nmlcyan}r_i}
+                $
+            }
+        };
+        \draw[overlay,-latex,nmlred, semithick] ($(a.south)+(-0.3,0.2)$) to[bend left=15] node[pos=1, left] {number of listeners} +(-1,-.5);
+        \draw[overlay,-latex,nmlcyan, semithick] ($(a.north)+(1.5,-0.1)$) to[bend left=15] node[pos=1, right] {listener rating (1--5)} +(1,.5);
+    }
 \end{center}
 
 \textbf{When to use MOS?}
@@ -478,6 +607,11 @@ text-to-speech or music generation.
 {MOS was first widely adopted in the telecommunications industry in the 20th century, where human listeners rated the clarity of phone calls.
 It became the gold standard for assessing voice quality long before automated metrics were available, and it is still referenced in
 ITU standards today.}
+
+\textbf{Other related metrics}
+
+MOS is the gold standard for subjective audio quality but is expensive to collect. For automated alternatives,
+see PESQ (speech quality) and STOI (intelligibility).
 
 % ---------- Perceptual Evaluation of Speech Quality ---------
 \clearpage
@@ -516,6 +650,10 @@ interpretable score that correlates strongly with human judgments.
 {PESQ was standardized by the ITU-T in 2001 and quickly became the go-to tool for testing phone call quality worldwide. 
 In fact, telecom engineers used it to benchmark mobile networks long before smartphones became common, making it one of the
 first AI-adjacent metrics to shape how we all experience everyday communication.}
+
+\textbf{Other related metrics}
+
+PESQ focuses on overall speech quality, while STOI focuses on intelligibility. Both aim to approximate MOS without requiring human listeners.
 
 % ---------- Short-Time Objective Intelligibility ---------
 \clearpage
@@ -556,6 +694,10 @@ or distortions. It is particularly relevant for applications like speech enhance
 \orangebox{Did you know that...}
 {STOI was originally developed at Delft University of Technology in the Netherlands, together with Oticon, a hearing aid company in Denmark.}
 
+\textbf{Other related metrics}
+
+STOI focuses on intelligibility, while PESQ evaluates overall quality. Both are automated proxies for MOS.
+For text-based evaluation of generated audio transcriptions, see WER in the NLP chapter.
 
 % ---------- Benchmarks ---------
 \clearpage
