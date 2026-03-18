@@ -49,6 +49,18 @@ clusters, as it normalizes the score to a standard range. AMI when you want to a
 
 }
 
+\clearpage
+\thispagestyle{customstyle}
+
+\orangebox{Did you know that...}
+{Mutual Information comes from information theory, where it measures how much knowing one variable reduces uncertainty about another.
+In clustering, this translates to: how much does knowing the cluster assignment tell us about the true class labels?}
+
+\textbf{Other related metrics}
+
+For a normalized version bounded [0,1], use NMI. For a chance-adjusted version, use AMI.
+Other external metrics include the Adjusted Rand Index and V-Measure.
+
 % ---------- rand index ----------
 \clearpage
 \thispagestyle{clusteringstyle}
@@ -96,6 +108,18 @@ multiple clusterings is needed. Interpretability and connection to pairwise agre
     RI scores even when the clusterings are significantly different.
 }
 
+\clearpage
+\thispagestyle{customstyle}
+
+\orangebox{Did you know that...}
+{The Rand Index was proposed by William M. Rand in 1971. The Adjusted Rand Index (ARI) correction was later introduced by Hubert and Arabie in 1985 to account
+for the fact that two random clusterings can have a surprisingly high RI simply by chance.}
+
+\textbf{Other related metrics}
+
+The Rand Index is a pair-counting metric like the Fowlkes-Mallows Index. For information-theoretic alternatives, consider NMI or AMI.
+The Pair Confusion Matrix provides the raw counts (TP, TN, FP, FN) from which RI is derived.
+
 % ---------- calinski harabasz index ----------
 \clearpage
 \thispagestyle{clusteringstyle}
@@ -115,9 +139,9 @@ dispersion within clusters.
                 $
             }
         };
-        \draw[-latex,nmlcyan, semithick] ($(a.north)+(0.5,-0.1)$) to[bend right=15] node[pos=1, left] {between-cluster dispersion} +(-1,.5);
-        \draw[-latex,nmlpurple, semithick] ($(a.south)+(0.5,0.3)$) to[bend left=15] node[pos=1, left] {within-cluster dispersion} +(-1,-.5);
-        \draw[-latex,nmlred, semithick] ($(a.north)+(2.5,-0.1)$) to[bend left=15] node[pos=1, right] {$k$ = clusters, $N$ = samples} +(1,.5);
+        \draw[-latex,nmlcyan, semithick] ($(a.north)+(0.5,-0.1)$) to[bend right=15] node[pos=1, left] {between-cluster sum} +(-1,.5);
+        \draw[-latex,nmlpurple, semithick] ($(a.south)+(0.5,0.3)$) to[bend left=15] node[pos=1, left] {within-cluster sum} +(-1,-.5);
+        \draw[-latex,nmlred, semithick] ($(a.north)+(2.5,-0.1)$) to[bend left=15] node[pos=1, right] {clusters and samples} +(1,.5);
     }
 \end{center}
 
@@ -137,6 +161,18 @@ optimal number of clusters by maximizing the CH Index across different cluster c
 {
     \item The calculation assumes a Euclidean distance metric, which may limit its applicability for non-Euclidean data.
 }
+
+\clearpage
+\thispagestyle{customstyle}
+
+\orangebox{Did you know that...}
+{The Calinski-Harabasz Index is also known as the Variance Ratio Criterion (VRC). It was introduced by Calinski and Harabasz in 1974 and is one of the
+fastest clustering quality metrics to compute, since it only requires cluster centroids and point-to-centroid distances.}
+
+\textbf{Other related metrics}
+
+The CH Index is an internal metric like the Silhouette Score and Davies-Bouldin Index. All three can be used to select the optimal number of clusters
+when ground truth is unavailable. The CH Index tends to favor convex, equally-sized clusters.
 
 % ---------- contingency matrix ----------
 \clearpage
@@ -171,6 +207,18 @@ complementary evaluation methods.
     \item For datasets with many clusters or categories, the matrix can become large and harder to interpret.
     \item Does not provide a single score.
 }
+
+\clearpage
+\thispagestyle{customstyle}
+
+\orangebox{Did you know that...}
+{The Contingency Matrix is the foundation for many clustering metrics. Mutual Information, the Rand Index, and the V-Measure can all be derived
+from the entries of the contingency matrix, making it the most fundamental clustering evaluation tool.}
+
+\textbf{Other related metrics}
+
+The Contingency Matrix serves as the basis for computing NMI, ARI, and V-Measure. For a pairwise variant, see the Pair Confusion Matrix.
+For a single summary score, consider the Adjusted Rand Index or Fowlkes-Mallows Index.
 
 % ---------- pair confusion matrix ----------
 \clearpage
@@ -251,6 +299,9 @@ making the pair confusion matrix the clustering equivalent of the classification
 
 \textbf{Other related metrics}
 
+The Pair Confusion Matrix provides the raw counts from which the Rand Index and Adjusted Rand Index are computed.
+For a non-pairwise view, see the Contingency Matrix. For a single summary score, consider the Fowlkes-Mallows Index.
+
 % ---------- Completeness Score ----------
 \clearpage
 \thispagestyle{clusteringstyle}
@@ -274,7 +325,7 @@ clustering. Completeness is mathematically defined using conditional entropy bet
                 $
             }
         };
-        \draw[-latex,nmlcyan, semithick] ($(a.north)+(1.5,-0.1)$) to[bend left=15] node[pos=1, right] {conditional entropy of clusters given classes} +(1,.5);
+        \draw[-latex,nmlcyan, semithick] ($(a.north)+(1.5,-0.1)$) to[bend left=15] node[pos=1, right] {cond. entropy of clusters} +(1,.5);
         \draw[-latex,nmlpurple, semithick] ($(a.south)+(2.0,0.3)$) to[bend left=15] node[pos=1, left] {entropy of clusters} +(-1,-.5);
     }
 \end{center}
@@ -296,7 +347,7 @@ topic should ideally belong to one cluster.
 }
 {
     \item Requires ground-truth labels.
-    \item Trade-Off with Homogeneity. Completeness tends to decrease as completeness increases, creating a challenge when
+    \item Trade-Off with Homogeneity. Completeness tends to decrease as homogeneity increases, creating a challenge when
     trying to optimize both simultaneously.
     \item Not normalized with regards to random labeling.
 }
@@ -330,7 +381,7 @@ It is designed to assess the purity of clusters by evaluating the entropy of cla
                 $
             }
         };
-        \draw[-latex,nmlcyan, semithick] ($(a.north)+(1.5,-0.1)$) to[bend left=15] node[pos=1, right] {conditional entropy of classes given clusters} +(1,.5);
+        \draw[-latex,nmlcyan, semithick] ($(a.north)+(1.5,-0.1)$) to[bend left=15] node[pos=1, right] {cond. entropy of classes} +(1,.5);
         \draw[-latex,nmlpurple, semithick] ($(a.south)+(2.0,0.3)$) to[bend left=15] node[pos=1, left] {entropy of classes} +(-1,-.5);
     }
 \end{center}
@@ -480,6 +531,18 @@ Davies-Bouldin Index is particularly useful when we have ground truth labels and
 \item The usage of centroid distance limits the distance metric to Euclidean space.
 }
 
+\clearpage
+\thispagestyle{customstyle}
+
+\orangebox{Did you know that...}
+{The Davies-Bouldin Index was proposed by David L. Davies and Donald W. Bouldin in 1979. Unlike the Silhouette Score which evaluates each data point individually,
+the Davies-Bouldin Index works at the cluster level, making it computationally cheaper for large datasets.}
+
+\textbf{Other related metrics}
+
+The Davies-Bouldin Index is an internal metric like the Silhouette Score and Calinski-Harabasz Index.
+Lower Davies-Bouldin values indicate better clustering, while higher Silhouette and CH values indicate better clustering.
+
 % ---------- Fowlkes-Mallows Index ----------
 \clearpage
 \thispagestyle{clusteringstyle}
@@ -498,8 +561,8 @@ or between a clustering result and a ground-truth classification. It is defined 
                 $
             }
         };
-        \draw[-latex,nmlcyan, semithick] ($(a.north)+(0.0,-0.1)$) to[bend right=15] node[pos=1, left] {pairs correctly clustered together} +(-1,.5);
-        \draw[-latex,nmlpurple, semithick] ($(a.south)+(1.5,0.3)$) to[bend left=15] node[pos=1, left] {incorrectly paired (FP, FN)} +(-1,-.5);
+        \draw[-latex,nmlcyan, semithick] ($(a.north)+(0.0,-0.1)$) to[bend right=15] node[pos=1, left] {correctly paired} +(-1,.5);
+        \draw[-latex,nmlpurple, semithick] ($(a.south)+(1.5,0.3)$) to[bend left=15] node[pos=1, left] {incorrectly paired} +(-1,-.5);
     }
 \end{center}
 
@@ -578,5 +641,17 @@ Use Silhouette Score when the ground truth labels are unknown and the evaluation
 }
 {
 \item Silhouette Score can generally be higher for convex clusters than other clusters, such as density based clusters.
-\item Higher Silhouette Score doesn't necessarily indicate that the clusters will have equal sizes; the clusters can still vary in cardinality. 
+\item Higher Silhouette Score doesn't necessarily indicate that the clusters will have equal sizes; the clusters can still vary in cardinality.
 }
+
+\clearpage
+\thispagestyle{customstyle}
+
+\orangebox{Did you know that...}
+{The Silhouette Coefficient was introduced by Peter Rousseeuw in 1987. Silhouette plots, which visualize the coefficient for each data point sorted by cluster,
+are one of the most popular tools for visually assessing cluster quality and choosing the optimal number of clusters.}
+
+\textbf{Other related metrics}
+
+The Silhouette Score is an internal metric (no ground truth needed), like the Davies-Bouldin Index and Calinski-Harabasz Index.
+For external evaluation when labels are available, consider the Adjusted Rand Index or Normalized Mutual Information.
