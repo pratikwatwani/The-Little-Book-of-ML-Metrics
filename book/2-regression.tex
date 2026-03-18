@@ -480,7 +480,7 @@ targets and predicted values are very different.
 }
 {
     \item Undefined when $|Y_{t}| = |\hat{Y_{t}}| = 0$
-    \item sMAPE is not symmetric to over- and under-forecasts. For example, if $Y_{t} = 100$ and in one case we have $\hat{Y_{t}} = 90$, this gives ansMAPE of 4.76\%; whereas if $\hat{Y_{t}} = 110$, then the sMAPE would be 5.26\%.
+    \item sMAPE is not symmetric to over- and under-forecasts. For example, if $Y_{t} = 100$ and in one case we have $\hat{Y_{t}} = 90$, this gives an sMAPE of 4.76\%; whereas if $\hat{Y_{t}} = 110$, then the sMAPE would be 5.26\%.
 }
 
 \clearpage
@@ -650,7 +650,9 @@ of forecasts across datasets with different units or magnitudes.
     \item MASE may not be as intuitive to interpret as some other metrics like MAE or MAPE.
 }
 
-% \clearpage
+\clearpage
+\thispagestyle{customstyle}
+
 \orangebox{Did you know that...}
 {MASE was created by Anne B. Koehler and Rob J. Hyndman, co-author of the book Forecasting: Principles and Practice, widely regarded as one of the definitive resources in forecasting.}
 
@@ -740,7 +742,7 @@ of events occurring in a fixed time or space (e.g., website clicks per hour, pho
         \node[inner sep=2pt, font=\Large] (a) {
             {
                 $\displaystyle
-                MPD = \frac{1}{{\color{nmlred}n}} \sum_{t=1}^{n} 2 \left( {\color{nmlcyan}Y_t} \log \left( \frac{{\color{nmlcyan}Y_t}}{{\color{nmlpurple}\hat{Y}_t}} \right) - ( {\color{nmlcyan}Y_t} - {\color{nmlpurple}\hat{Y}_t} ) \right)
+                \text{MPD} = \frac{1}{{\color{nmlred}n}} \sum_{t=1}^{n} 2 \left( {\color{nmlcyan}Y_t} \log \left( \frac{{\color{nmlcyan}Y_t}}{{\color{nmlpurple}\hat{Y}_t}} \right) - ( {\color{nmlcyan}Y_t} - {\color{nmlpurple}\hat{Y}_t} ) \right)
                 $
             }
         };
@@ -801,7 +803,7 @@ positive right-skewed distribution, such as insurance claims, response times, or
     \node[inner sep=2pt, font=\Large] (a) {
         {
             $\displaystyle
-            MGD = \frac{1}{{\color{nmlred}n}} \sum_{t=1}^{n} 2 \left( \log\left(\frac{{\color{nmlpurple}\hat{y}_t}}{{\color{nmlcyan}y_t}}\right) + \frac{{\color{nmlcyan}y_t}}{{\color{nmlpurple}\hat{y}_t}} - 1 \right)
+            \text{MGD} = \frac{1}{{\color{nmlred}n}} \sum_{t=1}^{n} 2 \left( \log\left(\frac{{\color{nmlpurple}\hat{y}_t}}{{\color{nmlcyan}y_t}}\right) + \frac{{\color{nmlcyan}y_t}}{{\color{nmlpurple}\hat{y}_t}} - 1 \right)
             $
         }
     };
@@ -850,9 +852,9 @@ continuous positive data (Gamma). For general-purpose regression evaluation, con
 
 % ---------- R-squared ----------
 \clearpage
+\thispagestyle{regressionstyle}
 \section{R-squared}
 \subsection{R-squared}
-\thispagestyle{regressionstyle}
 
 R-squared needs little introduction; it's featured in every statistics book. Also known as the coefficient of determination, it's commonly introduced as a measure that quantifies the amount of variability explained by the regression model.
 
@@ -1049,11 +1051,11 @@ have unequal costs, such as demand forecasting or risk estimation.
 
 \thispagestyle{customstyle}
 
-\begin{wrapfigure}{r}{0.45\textwidth}
+\begin{wrapfigure}{r}{0.55\textwidth}
     \centering
-    \vspace{-5pt} 
-    \includegraphics[width=0.40\textwidth]{figures/Pinball_Loss.png} 
-    \vspace{-10pt} 
+    \vspace{-5pt}
+    \includegraphics[width=0.50\textwidth]{figures/Pinball_Loss.png}
+    \vspace{-10pt}
 \end{wrapfigure}
 
 
@@ -1083,7 +1085,7 @@ It focuses specifically on how well the variability of the data is explained, ra
         \node[inner sep=2pt, font=\Large] (a) {
             {
                 $\displaystyle
-                EVS = 1 - \frac{Var({\color{nmlcyan}Y} - {\color{nmlpurple}\hat{Y}})}{Var({\color{nmlcyan}Y})}
+                \text{EVS} = 1 - \frac{\text{Var}({\color{nmlcyan}Y} - {\color{nmlpurple}\hat{Y}})}{\text{Var}({\color{nmlcyan}Y})}
                 $
             }
         };
